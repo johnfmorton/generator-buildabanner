@@ -31,6 +31,11 @@ module.exports = yeoman.generators.Base.extend({
             message: 'Would you like to include GSAP?',
             default: true
         }, {
+            type: 'confirm',
+            name: 'includeSublimeProject',
+            message: 'Include SublimeText project file?',
+            default: true
+        }, {
             type: 'input',
             name: 'archiveName',
             message: 'When this ad is zipped, what should it be called? ',
@@ -72,6 +77,7 @@ module.exports = yeoman.generators.Base.extend({
                 this.templatePath('_package.json'),
                 this.destinationPath('package.json')
             );
+            // process and copy the gulpfile
             var gulpfileOptions = {
                 creativeName: this.props.bannerName,
                 archiveName: this.props.archiveName
@@ -81,10 +87,12 @@ module.exports = yeoman.generators.Base.extend({
                 this.destinationPath('gulpfile.js'),
                 gulpfileOptions
             );
+            // copy only select contents from the 'dev' folder
             this.fs.copy(
                 this.templatePath('dev/!(_index.html|_*.*|*.src)'),
                 this.destinationPath('dev')
             );
+            // process and copy the dev/index.html
             var indexOptions = {
                 title: this.props.bannerName
             }
@@ -93,6 +101,7 @@ module.exports = yeoman.generators.Base.extend({
                 this.destinationPath('dev/index.html'),
                 indexOptions
             );
+            // process and copy the dev/style.scss
             var styleOptions = {
                 bannerWidth: this.props.bannerWidth,
                 bannerHeight: this.props.bannerHeight
@@ -102,9 +111,16 @@ module.exports = yeoman.generators.Base.extend({
                 this.destinationPath('dev/style.scss'),
                 styleOptions
             );
+            // copy the SublimeText project file
+            if (this.props.includeSublimeProject == true) {
+                this.fs.copy(
+                    this.templatePath('_bannerbuilder.sublime-project'),
+                    this.destinationPath('bannerbuilder.sublime-project')
+                );
+            }
 
             //this.fs.copy(
-            //this.templatePath('_bower.json'),
+            //this.templatePath('_bower.json.bak'),
             //this.destinationPath('bower.json')
             //);
         },
