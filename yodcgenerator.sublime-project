@@ -1,0 +1,13 @@
+{
+	"folders":
+	[
+		{
+			"name": "All files",
+            "path": "."
+		},
+        {
+            "name": "Template",
+            "path": "./generator-buildabanner/generators/app/templates"
+        }
+	]
+}
