@@ -1,0 +1,76 @@
+@charset "UTF-8";
+/* CSS Document */ 
+
+$prettyBlue: #6699cc;
+
+html {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-touch-callout: none;
+    text-rendering: optimizeLegibility;
+}
+
+/* Default style, feel free to remove if not needed. */
+body, body * {
+	vertical-align: baseline;
+	border: 0;
+	outline: 0;
+	padding: 0;
+	margin: 0;
+	font: 100%/1.5 Arial, sans-serif;
+}
+
+/* Div layer for the entire banner. */
+#container_dc {
+	-webkit-perspective: 300;
+    perspective: 300;
+
+    -ms-transform-origin:0% 0%; /* IE 9 */
+    -webkit-transform-origin:0% 0%; /* Safari and Chrome */
+    -moz-transform-origin:0% 0%; /* Firefox */
+    -o-transform-origin:0% 0%; /* Opera */
+
+	position: absolute;
+    // width and height are 2px less than the expected 
+    // size to accommodate the 1px border on the ad
+	width: <%= bannerWidth %>px;
+	height: <%= bannerHeight %>px;
+	border:1px solid #666666;
+	top: 0px;
+	left: 0px;
+	margin: auto;
+
+	-webkit-transform : translateZ(0);
+    -o-transform : translateZ(0);
+    -moz-transform : translateZ(0);
+    transform : translateZ(0);
+
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+}
+
+#content_dc {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	left: 0px;
+	background-color: #FFF;
+	z-index: 100;
+	background: $prettyBlue; // url(background.jpg);
+}
+
+/* Invisible button for background clickthrough. */
+#background_exit_dc {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	left: 0px;
+	cursor: pointer;
+	opacity: 0;
+	z-index: 400;
+}
+
+:focus {outline:none;}
+::-moz-focus-inner {border:0;}

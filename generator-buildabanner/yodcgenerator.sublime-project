@@ -7,12 +7,12 @@
         },
 		{
 			"name": "Yeoman",
-            "path": "./generators/app/",
+            "path": "./generator-buildabanner/generators/app/",
             "folder_exclude_patterns": ["templates"]
 		},
         {
             "name": "Template",
-            "path": "./generators/app/templates"
+            "path": "./generator-buildabanner/generators/app/templates"
         }
 	]
 }
