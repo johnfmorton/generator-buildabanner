@@ -4,7 +4,7 @@
   "description": "Yeoman generator to get an HTML banner starter set created",
   "license": "MIT",
   "main": "app/index.js",
-  "repository": "johnfmorton/generator-buildabanner",
+  "repository": "johnfmorton/yeoman-doubleclick-banner-starter",
   "author": {
     "name": "John F Morton",
     "email": "john@johnfmorton.com",
