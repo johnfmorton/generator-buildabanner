@@ -2,6 +2,7 @@
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
+var Download = require('download');
 
 module.exports = yeoman.generators.Base.extend({
     prompting: function() {
@@ -28,7 +29,12 @@ module.exports = yeoman.generators.Base.extend({
         }, {
             type: 'confirm',
             name: 'includeGsap',
-            message: 'Would you like to include GSAP?',
+            message: 'Include GSAP for offline use?',
+            default: true
+        }, {
+            type: 'confirm',
+            name: 'includeOfflineEnabler',
+            message: 'Include the DoubleClick Enabler for offline use?',
             default: true
         }, {
             type: 'confirm',
@@ -119,6 +125,19 @@ module.exports = yeoman.generators.Base.extend({
                 );
             }
 
+            if (this.props.includeOfflineEnabler == true) {
+
+                new Download({
+                        mode: '755'
+                    })
+                    .get('https://s0.2mdn.net/ads/studio/Enabler.js')
+                    .dest('offline')
+                    .run();
+            }
+
+
+
+
             //this.fs.copy(
             //this.templatePath('_bower.json.bak'),
             //this.destinationPath('bower.json')
@@ -144,8 +163,10 @@ module.exports = yeoman.generators.Base.extend({
                 'saveDev': true
             });
         };
-        //this.installDependencies();
-       this.npmInstall();
+        // not used since we're not using Bower
+        // this.installDependencies();
+
+        this.npmInstall();
     },
 
     end: function() {

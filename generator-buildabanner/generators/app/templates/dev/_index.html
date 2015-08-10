@@ -6,6 +6,13 @@
     <!-- Studio Enabler Required -->
     <!-- this was updated to work on http or https by removing the protocal entirely -->
     <script src="//s0.2mdn.net/ads/studio/Enabler.js" type="text/javascript"></script>
+
+   <!--
+    For offline use;
+    <script src="../offline/Enabler.js" type="text/javascript"></script>
+
+     -->
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <style type="text/css">
     #container_dc {
@@ -51,7 +58,7 @@
     // JS files using the Enabler's built in loadScript
     // function then it will issue a call back when done
     // Where did it come from?
-    // http://greensock.com/forums/topic/9349-html5-banners-wgsap-jquery-best-practices-file-sizes/
+    // http://greensock.com/forums/topic/12147-polite-loading-gsap-into-a-dc-html5-banner/
     //
     function _politeLoad(urls, onComplete) {
         var l = urls.length,
