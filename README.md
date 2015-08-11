@@ -2,7 +2,7 @@
 
 This is a [Yeoman](http://yeoman.io) generator to get a starter DoubleClick banner scaffolded out quickly.
 
-# Video? Oh yeah.
+## Let me show you how this works.
 
 [Watch the video walk thru](https://www.youtube.com/watch?v=_7dIIwlGdwUl)
 
