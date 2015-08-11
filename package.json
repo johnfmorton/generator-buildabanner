@@ -1,7 +1,7 @@
 {
   "name": "generator-buildabanner",
   "version": "0.1.0",
-  "description": "Yeoman generator to get an HTML banner starter set created",
+  "description": "Yeoman generator to get an HTML DoubleClick banner started using Gulp",
   "license": "MIT",
   "main": "app/index.js",
   "repository": "johnfmorton/yeoman-doubleclick-banner-starter",
@@ -17,7 +17,11 @@
     "generators"
   ],
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator",
+    "doubleclick",
+    "advertising",
+    "gulp",
+    "banner"
   ],
   "dependencies": {
     "yeoman-generator": "^0.19.0",
