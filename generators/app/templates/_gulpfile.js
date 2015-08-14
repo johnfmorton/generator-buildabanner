@@ -15,16 +15,41 @@ var zip = require('gulp-zip');
 var runSequence = require('run-sequence');
 
 // tasks
+//
+// Uglify external JS files
 gulp.task('uglify:dist', function() {
+    var opt = {
+      mangle: true, // make shorter variable names
+      compress: {
+        drop_debugger: true, // drop debugger messages from code
+        drop_console: true // drop console messages from code
+        },
+      output: {
+        beautify: false // make code pretty? default is false
+      }
+    };
     return gulp.src('dev/script.js')
-        .pipe(uglify())
+        .pipe(uglify(opt))
         .pipe(rename('script.js'))
         .pipe(gulp.dest('dist/'));
 });
 
+// Uglify / Minify inline JS and CSS
 gulp.task('minify-inline', function() {
+    var opt = {
+        js : { // options for inline JS
+          mangle: true, // make shorter variable names
+          compress: {
+            drop_debugger: true, // drop debugger messages from code
+            drop_console: true // drop console messages from code
+            },
+          output: {
+            beautify: false // make code pretty? default is false
+          }
+      }
+    };
     gulp.src('dist/*.html')
-        .pipe(minifyInline())
+        .pipe(minifyInline(opt))
         .pipe(gulp.dest('dist/'))
 });
 
