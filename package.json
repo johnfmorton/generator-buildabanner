@@ -4,7 +4,7 @@
   "description": "Yeoman generator to get an HTML DoubleClick banner started using Gulp",
   "license": "MIT",
   "main": "app/index.js",
-  "repository": "johnfmorton/yeoman-doubleclick-banner-starter",
+  "repository": "johnfmorton/generator-buildabanner",
   "author": {
     "name": "John F Morton",
     "email": "john@johnfmorton.com",
