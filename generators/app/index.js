@@ -3,6 +3,7 @@ var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
 var Download = require('download');
+var camelCase = require('camelcase');
 
 module.exports = yeoman.generators.Base.extend({
     prompting: function() {
@@ -18,8 +19,13 @@ module.exports = yeoman.generators.Base.extend({
         var prompts = [{
             type: 'input',
             name: 'bannerName',
-            message: 'What is the name of your banner?',
+            message: 'Banner name:',
             default: this.appname
+        }, {
+            type: 'input',
+            name: 'bannerDesc',
+            message: 'Description:',
+            default: 'An HTML banner'
         }, {
             type: 'list',
             name: 'bannerSize',
@@ -79,9 +85,15 @@ module.exports = yeoman.generators.Base.extend({
 
     writing: {
         app: function() {
-            this.fs.copy(
+            var packageOptions = {
+                bannerName: camelCase(this.props.bannerName),
+                bannerSize: this.props.bannerSize,
+                bannerDesc: this.props.bannerDesc
+            }
+            this.fs.copyTpl(
                 this.templatePath('_package.json'),
-                this.destinationPath('package.json')
+                this.destinationPath('package.json'),
+                packageOptions
             );
             // process and copy the gulpfile
             var gulpfileOptions = {

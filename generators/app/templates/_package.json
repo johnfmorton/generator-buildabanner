@@ -1,6 +1,8 @@
 {
-  "name": "package",
+  "name": "<%= bannerName %>",
   "version": "0.0.0",
+  "bannerSize": "<%= bannerSize %>",
+  "description": "<%= bannerDesc %>",
   "keywords": [
     "doubleclick",
     "html"
