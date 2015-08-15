@@ -136,7 +136,7 @@ gulp.task('watch', function() {
 gulp.task('default', ['sass:dev', 'connect', 'open', 'watch']);
 
 gulp.task('build', function(callback) {
-    runSequence('del', 'copy-to-dist-folder', ['minify-html'], ['minify-inline', 'sass:dist'], 'uglify:dist',
+    runSequence('del', 'copy-to-dist-folder', ['minify-html'], ['minify-inline', 'sass:dist'], 'uglify:dist', ['compress'],
         callback);
 });
 
