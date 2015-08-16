@@ -11,7 +11,7 @@ module.exports = yeoman.generators.Base.extend({
 
         // Have Yeoman greet the user.
         this.log(yosay(
-            'Welcome to the ' + chalk.bold.red('Buildabanner') + ' generator!'
+            'Welcome to the ' + chalk.bold.red('buildabanner') + ' generator!'
         ));
 
         var bannerSize = 'default';
@@ -19,7 +19,8 @@ module.exports = yeoman.generators.Base.extend({
         var prompts = [{
             type: 'input',
             name: 'bannerName',
-            message: 'Banner name:',
+            filter: function(answer) { return camelCase(answer) },
+            message: 'Banner name (camelCase):',
             default: this.appname
         }, {
             type: 'input',
@@ -40,7 +41,7 @@ module.exports = yeoman.generators.Base.extend({
         }, {
             type: 'confirm',
             name: 'includeOfflineEnabler',
-            message: 'Include the DoubleClick Enabler for offline use?',
+            message: 'Include DoubleClick Enabler for offline use?',
             default: true
         }, {
             type: 'confirm',
@@ -51,7 +52,9 @@ module.exports = yeoman.generators.Base.extend({
             type: 'input',
             name: 'archiveName',
             message: 'When this ad is zipped, what should it be called? ',
-            default: 'banner_archive.zip'
+            default: function(answers) {
+                return answers.bannerName + "-" + answers.bannerSize + ".zip"
+            }
         }];
 
         this.prompt(prompts, function(props) {
@@ -86,7 +89,7 @@ module.exports = yeoman.generators.Base.extend({
     writing: {
         app: function() {
             var packageOptions = {
-                bannerName: camelCase(this.props.bannerName),
+                bannerName: this.props.bannerName,
                 bannerSize: this.props.bannerSize,
                 bannerDesc: this.props.bannerDesc
             }
@@ -146,14 +149,6 @@ module.exports = yeoman.generators.Base.extend({
                     .dest('offline')
                     .run();
             }
-
-
-
-
-            //this.fs.copy(
-            //this.templatePath('_bower.json.bak'),
-            //this.destinationPath('bower.json')
-            //);
         },
 
         projectfiles: function() {
@@ -180,11 +175,11 @@ module.exports = yeoman.generators.Base.extend({
     },
 
     end: function() {
-	this.log('\n');
-	this.log(chalk.bold.yellow('************************************'));
-	this.log(chalk.bold.yellow('*  Start by entering \'') + chalk.bold.blue('gulp') + chalk.bold.yellow('\' below  *'));
-	this.log(chalk.bold.yellow('************************************'));
-	this.log(' ');
-	this.log(chalk.bold.red('Now go build a that banner.'));
+        this.log('\n');
+        this.log(chalk.bold.yellow('************************************'));
+        this.log(chalk.bold.yellow('*  Start by entering \'') + chalk.bold.blue('gulp') + chalk.bold.yellow('\' below  *'));
+        this.log(chalk.bold.yellow('************************************'));
+        this.log(' ');
+        this.log(chalk.bold.red('Now go build a that banner.'));
     }
 });
