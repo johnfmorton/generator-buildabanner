@@ -175,18 +175,16 @@ module.exports = yeoman.generators.Base.extend({
                 'saveDev': true
             });
         };
-        // not used since we're not using Bower
-        // this.installDependencies();
 
         this.npmInstall();
     },
 
     end: function() {
-        console.log('\n');
-        console.log(chalk.bold.yellow('************************************'));
-        console.log(chalk.bold.yellow('* Start by entering \'') + chalk.bold.blue('gulp') + chalk.bold.yellow('\' below *'));
-        console.log(chalk.bold.yellow('************************************'));
-        console.log(' ');
-        console.log(chalk.bold.red('Now go build a that banner.'));
+	this.log('\n');
+	this.log(chalk.bold.yellow('************************************'));
+	this.log(chalk.bold.yellow('*  Start by entering \'') + chalk.bold.blue('gulp') + chalk.bold.yellow('\' below  *'));
+	this.log(chalk.bold.yellow('************************************'));
+	this.log(' ');
+	this.log(chalk.bold.red('Now go build a that banner.'));
     }
 });
