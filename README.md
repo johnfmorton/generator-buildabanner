@@ -4,8 +4,7 @@ This is a [Yeoman](http://yeoman.io) generator to get a starter DoubleClick bann
 
 ## Let me show you how this works.
 
-![https://cloud.githubusercontent.com/assets/119723/9295071/84157934-4415-11e5-907d-3fb40bceb977.jpg](https://www.youtube.com/watch?v=_7dIIwlGdwUl "Video walk thru")
-
+[![Video Walk Thru](https://cloud.githubusercontent.com/assets/119723/9295071/84157934-4415-11e5-907d-3fb40bceb977.jpg)](https://www.youtube.com/watch?v=_7dIIwlGdwUl)
 
 ## Notes
 
