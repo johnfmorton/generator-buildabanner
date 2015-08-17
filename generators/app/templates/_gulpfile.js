@@ -13,9 +13,30 @@ var connect = require('gulp-connect');
 var open = require('gulp-open');
 var zip = require('gulp-zip');
 var runSequence = require('run-sequence');
+var header = require('gulp-header');
 
-// tasks
-//
+// read in the package file
+var pkg = require('./package.json');
+
+// Banner message to be appended to minified files
+var nowDate = new Date();
+
+var bannerMessageHtml = ['<!--',
+  ' <%= openTag %> pkg.name %> - <%= openTag %> pkg.description %>',
+  ' @version v<%= openTag %> pkg.version %>',
+  ' @date ' + (nowDate.getMonth() + 1) + "-" + nowDate.getDate()+"-"+ nowDate.getFullYear() + " at " + nowDate.getHours() +":"+nowDate.getMinutes()+":"+nowDate.getSeconds(),
+  ' -->',
+  ''].join('\n');
+var bannerMessageJsCss = ['/**',
+  ' * <%= openTag %> pkg.name %> - <%= openTag %> pkg.description %>',
+  ' * @version v<%= openTag %> pkg.version %>',
+  ' * @date ' + (nowDate.getMonth() + 1) + "-" + nowDate.getDate()+"-"+ nowDate.getFullYear() + " at " + nowDate.getHours() +":"+nowDate.getMinutes()+":"+nowDate.getSeconds(),
+  ' */',
+  ''].join('\n');
+
+
+// TASKS
+
 // Uglify external JS files
 gulp.task('uglify:dist', function() {
     var opt = {
@@ -31,6 +52,7 @@ gulp.task('uglify:dist', function() {
     return gulp.src('dev/script.js')
         .pipe(uglify(opt))
         .pipe(rename('script.js'))
+        .pipe(header(bannerMessageJsCss, { pkg : pkg } ))
         .pipe(gulp.dest('dist/'));
 });
 
@@ -68,6 +90,7 @@ gulp.task('sass:dist', function() {
         .pipe(sass({
             outputStyle: "compressed"
         }))
+        .pipe(header(bannerMessageJsCss, { pkg : pkg } ))
         .pipe(rename('style.css'))
         .pipe(gulp.dest('dist'));
 });
@@ -80,6 +103,7 @@ gulp.task('minify-html', function() {
 
     return gulp.src('dist/*.html')
         .pipe(minifyHTML(opts))
+        .pipe(header(bannerMessageHtml, { pkg : pkg } ))
         .pipe(gulp.dest('./dist/'));
 });
 

@@ -101,7 +101,8 @@ module.exports = yeoman.generators.Base.extend({
             // process and copy the gulpfile
             var gulpfileOptions = {
                 creativeName: this.props.bannerName,
-                archiveName: this.props.archiveName
+                archiveName: this.props.archiveName,
+                openTag: '<%='
             }
             this.fs.copyTpl(
                 this.templatePath('_gulpfile.js'),
