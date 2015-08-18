@@ -29,6 +29,12 @@ module.exports = yeoman.generators.Base.extend({
             default: 'An HTML banner'
         }, {
             type: 'list',
+            name: 'bannerType',
+            message: 'What type of banner is this?',
+            choices: ['DoubleClick', 'Standard'],
+            default: 'Standard'
+        }, {
+            type: 'list',
             name: 'bannerSize',
             message: 'Choose a size for this banner.',
             choices: ['300x250', '728x90', '160x600', '300x600'],
@@ -39,10 +45,12 @@ module.exports = yeoman.generators.Base.extend({
             message: 'Include GSAP for offline use?',
             default: true
         }, {
-            type: 'confirm',
-            name: 'includeOfflineEnabler',
-            message: 'Include DoubleClick Enabler for offline use?',
-            default: true
+            when: function (answers) {
+                return answers.bannerType === 'DoubleClick';
+              }, type: 'confirm',
+              name: 'includeOfflineEnabler',
+              message: "Include DoubleClick Enabler for offline use?",
+              default: true
         }, {
             type: 'confirm',
             name: 'includeSublimeProject',
@@ -88,6 +96,16 @@ module.exports = yeoman.generators.Base.extend({
 
     writing: {
         app: function() {
+            var bannerSuffix;
+            switch(this.props.bannerType) {
+                case "DoubleClick":
+                bannerSuffix = "_dc";
+                break;
+                case "Standard":
+                default:
+                bannerSuffix = "_standard"
+            }
+            var bannerType = this.props.bannerType;
             var packageOptions = {
                 bannerName: this.props.bannerName,
                 bannerSize: this.props.bannerSize,
@@ -114,12 +132,22 @@ module.exports = yeoman.generators.Base.extend({
                 this.templatePath('dev/!(_index.html|_*.*|*.src)'),
                 this.destinationPath('dev')
             );
+            var scriptOptions = {
+                bannerName: this.props.bannerName,
+                bannerSize: this.props.bannerSize,
+                bannerDesc: this.props.bannerDesc
+            }
+            this.fs.copyTpl(
+                this.templatePath('dev/_script' + bannerSuffix + '.js'),
+                this.destinationPath('dev/script.js'),
+                scriptOptions
+            );
             // process and copy the dev/index.html
             var indexOptions = {
                 title: this.props.bannerName
             }
             this.fs.copyTpl(
-                this.templatePath('dev/_index.html'),
+                this.templatePath('dev/_index' + bannerSuffix + '.html'),
                 this.destinationPath('dev/index.html'),
                 indexOptions
             );
@@ -137,7 +165,7 @@ module.exports = yeoman.generators.Base.extend({
             if (this.props.includeSublimeProject == true) {
                 this.fs.copy(
                     this.templatePath('_bannerbuilder.sublime-project'),
-                    this.destinationPath('bannerbuilder.sublime-project')
+                    this.destinationPath(this.props.bannerName+'.sublime-project')
                 );
             }
 
@@ -166,21 +194,21 @@ module.exports = yeoman.generators.Base.extend({
 
 
     install: function() {
-        if (this.props.includeGsap == true) {
+        if (this.props.includeGsap === true) {
             this.npmInstall(['gsap'], {
                 'saveDev': true
             });
         };
 
-        this.npmInstall();
+        //this.npmInstall();
     },
 
     end: function() {
         this.log('\n');
-        this.log(chalk.bold.yellow('************************************'));
-        this.log(chalk.bold.yellow('*  Start by entering \'') + chalk.bold.blue('gulp') + chalk.bold.yellow('\' below  *'));
-        this.log(chalk.bold.yellow('************************************'));
+        this.log(chalk.bold.yellow('------------------------------------'));
+        this.log(chalk.bold.yellow('|  Start by entering \'') + chalk.bold.blue('gulp') + chalk.bold.yellow('\' below  |'));
+        this.log(chalk.bold.yellow('------------------------------------'));
         this.log(' ');
-        this.log(chalk.bold.red('Now go build a that banner.'));
+        this.log(chalk.bold.red('For help: gulp help'));
     }
 });

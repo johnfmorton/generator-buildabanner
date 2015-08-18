@@ -20,7 +20,7 @@ body, body * {
 }
 
 /* Div layer for the entire banner. */
-#container_dc {
+#container_ad {
 	-webkit-perspective: 300;
     perspective: 300;
 
@@ -49,7 +49,7 @@ body, body * {
     -ms-backface-visibility: hidden;
 }
 
-#content_dc {
+#content_ad {
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -61,7 +61,7 @@ body, body * {
 }
 
 /* Invisible button for background clickthrough. */
-#background_exit_dc {
+#background_exit_ad {
 	position: absolute;
 	width: 100%;
 	height: 100%;

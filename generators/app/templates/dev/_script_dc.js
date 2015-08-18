@@ -13,9 +13,9 @@ var bgExit;
 bannerInit = function(){
 
     //Assign All the elements to the element on the page
-    container = document.getElementById('container_dc');
-    content = document.getElementById('content_dc');
-    bgExit = document.getElementById('background_exit_dc');
+    container = document.getElementById('container_ad');
+    content = document.getElementById('content_ad');
+    bgExit = document.getElementById('background_exit_ad');
     // someElementInHTML = document.getElementById('some_element_in_html');
 
     //Setup Background Image (this can be done in CSS as well

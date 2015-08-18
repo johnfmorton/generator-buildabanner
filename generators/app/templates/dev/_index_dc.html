@@ -15,7 +15,7 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <style type="text/css">
-    #container_dc {
+    #container_ad {
         display: none;
         z-index: 20;
     }
@@ -107,21 +107,21 @@
         extCSS.setAttribute("href", Enabler.getUrl("style.css"));
         document.getElementsByTagName("head")[0].appendChild(extCSS);
 
-        // The ad lives in the container_dc div. At the top of this
+        // The ad lives in the container_ad div. At the top of this
         // page, it was made invisible, now we can change the opacity
         // to 100% and be sure it's set to display as a block level element
-        document.getElementById("container_dc").style.opacity = 1;
-        document.getElementById("container_dc").style.display = "block";
+        document.getElementById("container_ad").style.opacity = 1;
+        document.getElementById("container_ad").style.display = "block";
     }
     </script>
 </head>
 
 <body>
-    <div id="container_dc">
-        <div id="content_dc">
+    <div id="container_ad">
+        <div id="content_ad">
             <!-- Your banner ad content goes here -->
         </div>
-        <button id="background_exit_dc"></button>
+        <button id="background_exit_ad"></button>
     </div>
 </body>
 
