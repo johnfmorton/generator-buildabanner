@@ -23,17 +23,19 @@ var pkg = require('./package.json');
 var nowDate = new Date();
 
 var bannerMessageHtml = ['<!--',
-  ' <%= openTag %> pkg.name %> - <%= openTag %> pkg.description %>',
-  ' @version v<%= openTag %> pkg.version %>',
-  ' @date ' + (nowDate.getMonth() + 1) + "-" + nowDate.getDate()+"-"+ nowDate.getFullYear() + " at " + nowDate.getHours() +":"+nowDate.getMinutes()+":"+nowDate.getSeconds(),
-  ' -->',
-  ''].join('\n');
+    ' <%= openTag %> pkg.name %> - <%= openTag %> pkg.description %>',
+    ' @version v<%= openTag %> pkg.version %>',
+    ' @date ' + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() + "-" + nowDate.getFullYear() + " at " + nowDate.getHours() + ":" + nowDate.getMinutes() + ":" + nowDate.getSeconds(),
+    ' -->',
+    ''
+].join('\n');
 var bannerMessageJsCss = ['/**',
-  ' * <%= openTag %> pkg.name %> - <%= openTag %> pkg.description %>',
-  ' * @version v<%= openTag %> pkg.version %>',
-  ' * @date ' + (nowDate.getMonth() + 1) + "-" + nowDate.getDate()+"-"+ nowDate.getFullYear() + " at " + nowDate.getHours() +":"+nowDate.getMinutes()+":"+nowDate.getSeconds(),
-  ' */',
-  ''].join('\n');
+    ' * <%= openTag %> pkg.name %> - <%= openTag %> pkg.description %>',
+    ' * @version v<%= openTag %> pkg.version %>',
+    ' * @date ' + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() + "-" + nowDate.getFullYear() + " at " + nowDate.getHours() + ":" + nowDate.getMinutes() + ":" + nowDate.getSeconds(),
+    ' */',
+    ''
+].join('\n');
 
 
 // TASKS
@@ -41,35 +43,37 @@ var bannerMessageJsCss = ['/**',
 // Uglify external JS files
 gulp.task('uglify:dist', function() {
     var opt = {
-      mangle: true, // make shorter variable names
-      compress: {
-        drop_debugger: true, // drop debugger messages from code
-        drop_console: true // drop console messages from code
+        mangle: true, // make shorter variable names
+        compress: {
+            drop_debugger: true, // drop debugger messages from code
+            drop_console: true // drop console messages from code
         },
-      output: {
-        beautify: false // make code pretty? default is false
-      }
+        output: {
+            beautify: false // make code pretty? default is false
+        }
     };
     return gulp.src('dev/script.js')
         .pipe(uglify(opt))
         .pipe(rename('script.js'))
-        .pipe(header(bannerMessageJsCss, { pkg : pkg } ))
+        .pipe(header(bannerMessageJsCss, {
+            pkg: pkg
+        }))
         .pipe(gulp.dest('dist/'));
 });
 
 // Uglify / Minify inline JS and CSS
 gulp.task('minify-inline', function() {
     var opt = {
-        js : { // options for inline JS
-          mangle: true, // make shorter variable names
-          compress: {
-            drop_debugger: true, // drop debugger messages from code
-            drop_console: true // drop console messages from code
+        js: { // options for inline JS
+            mangle: true, // make shorter variable names
+            compress: {
+                drop_debugger: true, // drop debugger messages from code
+                drop_console: true // drop console messages from code
             },
-          output: {
-            beautify: false // make code pretty? default is false
-          }
-      }
+            output: {
+                beautify: false // make code pretty? default is false
+            }
+        }
     };
     gulp.src('dist/*.html')
         .pipe(minifyInline(opt))
@@ -91,7 +95,9 @@ gulp.task('sass:dist', function() {
         .pipe(sass({
             outputStyle: "compressed"
         }))
-        .pipe(header(bannerMessageJsCss, { pkg : pkg } ))
+        .pipe(header(bannerMessageJsCss, {
+            pkg: pkg
+        }))
         .pipe(rename('style.css'))
         .pipe(gulp.dest('dist'));
 });
@@ -104,7 +110,9 @@ gulp.task('minify-html', function() {
 
     return gulp.src('dist/*.html')
         .pipe(minifyHTML(opts))
-        .pipe(header(bannerMessageHtml, { pkg : pkg } ))
+        .pipe(header(bannerMessageHtml, {
+            pkg: pkg
+        }))
         .pipe(gulp.dest('./dist/'));
 });
 
@@ -130,7 +138,7 @@ gulp.task('open', function() {
             //app: 'firefox'
     };
     gutil.log('-----------------------------------------');
-    gutil.log('Opening browser to:', gutil.colors.yellow('http://localhost:8889') );
+    gutil.log('Opening browser to:', gutil.colors.yellow('http://localhost:8889'));
     gutil.log('-----------------------------------------');
     gulp.src(__filename)
         .pipe(open(options));
@@ -141,7 +149,7 @@ gulp.task('copy-to-dist-folder', function() {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('compress', function () {
+gulp.task('compress', function() {
     return gulp.src('dist/*')
         .pipe(zip('<%= archiveName %>'))
         .pipe(gulp.dest('delivery'));
@@ -162,13 +170,23 @@ gulp.task('build', function(callback) {
         callback);
 });
 
-gulp.task('serve', function(callback){
+gulp.task('serve', function(callback) {
     runSequence('sass:dev', ['connect'], ['open', 'watch'],
         callback);
-  });
+});
 
 // Depricated: no longer needed because
 // it is part of the 'build' sequence now.
 gulp.task('finalize', ['compress']);
+
+gulp.task('help', function() {
+    gutil.log(gutil.colors.red('buildabanner'), 'help');
+    gutil.log('--------------------------');
+    gutil.log('There are 2 basic commands.');
+    gutil.log(gutil.colors.yellow('gulp'), ': for dev use, spins up server w livereload as you edit files');
+    gutil.log(gutil.colors.yellow('gulp build'), ': minifies files to', gutil.colors.red('dist'), 'directory');
+    gutil.log('and zips same files in', gutil.colors.red('delivery'), 'directory');
+    gutil.log('--------------------------');
+});
 
 gulp.task('default', ['serve']);
