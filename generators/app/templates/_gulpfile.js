@@ -3,6 +3,7 @@
 //
 // dependencies
 var gulp = require('gulp');
+var gutil = require('gulp-util');
 var uglify = require('gulp-uglify');
 var sass = require('gulp-sass');
 var minifyHTML = require('gulp-minify-html');
@@ -123,14 +124,14 @@ gulp.task('connect', function() {
 });
 
 gulp.task('open', function() {
-    console.log("-----------------------------------------");
-    console.log("Opening browser to: http://localhost:8889");
-    console.log("-----------------------------------------");
     var options = {
         uri: 'http://localhost:8889',
         app: 'Google Chrome'
             //app: 'firefox'
     };
+    gutil.log('-----------------------------------------');
+    gutil.log('Opening browser to:', gutil.colors.yellow('http://localhost:8889') );
+    gutil.log('-----------------------------------------');
     gulp.src(__filename)
         .pipe(open(options));
 });
@@ -147,7 +148,6 @@ gulp.task('compress', function () {
 });
 
 gulp.task('basic-reload', function() {
-    console.log('basic-reload task');
     gulp.src('dev')
         .pipe(connect.reload());
 });
@@ -157,11 +157,18 @@ gulp.task('watch', function() {
     gulp.watch(['dev/*.scss'], ['sass:dev']);
 });
 
-gulp.task('default', ['sass:dev', 'connect', 'open', 'watch']);
-
 gulp.task('build', function(callback) {
     runSequence('del', 'copy-to-dist-folder', ['minify-html'], ['minify-inline', 'sass:dist'], 'uglify:dist', ['compress'],
         callback);
 });
 
+gulp.task('serve', function(callback){
+    runSequence('sass:dev', ['connect'], ['open', 'watch'],
+        callback);
+  });
+
+// Depricated: no longer needed because
+// it is part of the 'build' sequence now.
 gulp.task('finalize', ['compress']);
+
+gulp.task('default', ['serve']);
