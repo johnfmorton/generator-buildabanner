@@ -200,7 +200,7 @@ module.exports = yeoman.generators.Base.extend({
             });
         };
 
-        //this.npmInstall();
+        this.npmInstall();
     },
 
     end: function() {
