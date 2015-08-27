@@ -50,7 +50,7 @@ anim = function(){
     // TweenLite.to(someElementInHTML, 1, {css:{top: "100px", left: "100px"}});
 }
 
-//Add Event Listeners
+//Add Event Listeners for DoubleClick
 addListeners = function() {
     bgExit.addEventListener('click', bgExitHandler, false);
 }
