@@ -6,7 +6,7 @@ var container;
 var content;
 var bgExit;
 
-var bar, hd1, hd2, hd3, cta;
+// var someElementInHTML;
 
 //Function to run with any animations starting on load, or bringing in images etc
 bannerInit = function(){
@@ -15,14 +15,15 @@ bannerInit = function(){
     container = document.getElementById('container_ad');
     content = document.getElementById('content_ad');
     bgExit = document.getElementById('background_exit_ad');
-    bar = document.getElementById('bar');
-    hd1 = document.getElementById('hd1');
-    hd2 = document.getElementById('hd2');
-    hd3 = document.getElementById('hd3');
-    cta = document.getElementById('cta');
+    // hd1 = document.getElementById('hd1');
+    // hd2 = document.getElementById('hd2');
+    // hd3 = document.getElementById('hd3');
+    // cta = document.getElementById('cta');
 
-    //Show Ad
-    container.style.display = "block";
+    // Show Ad (this can also be done in the index.html
+    // which it is in the default template.)
+    //
+    // container.style.display = "block";
 
 
     anim();
@@ -30,17 +31,16 @@ bannerInit = function(){
 
 anim = function(){
     console.log('animating');
-    var backSpeed = 1.2;
-    var tl = new TimelineLite();
 
-    tl.to(hd1, 0.25, {
-        css: {
-            left: "52px"
-        },
-        delay: 0.2,
-        ease: Back.easeOut.config(backSpeed)
-    }, '-=0.25');
+    // Example #1
+    //
+    // If you're using TimelineLite, you can follow this example
+    // var tl = new TimelineLite();
+    // tl.to(someElementInHTML, 1, {css:{top: "100px", left: "100px"}})
+    // tl.play();
 
-
-    tl.play();
+    // Example #2
+    //
+    // If you're just doing TweenLite directly without TimelineLite
+    // TweenLite.to(someElementInHTML, 1, {css:{top: "100px", left: "100px"}});
 }
