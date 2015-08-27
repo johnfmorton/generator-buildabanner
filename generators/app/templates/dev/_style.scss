@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /* CSS Document */ 
 
-$prettyBlue: #6699cc;
+$bannerBackColor: #6699cc;
 
 html {
     -webkit-tap-highlight-color: rgba(0,0,0,0);
@@ -21,9 +21,6 @@ body, body * {
 
 /* Div layer for the entire banner. */
 #container_ad {
-	-webkit-perspective: 300;
-    perspective: 300;
-
     -ms-transform-origin:0% 0%; /* IE 9 */
     -webkit-transform-origin:0% 0%; /* Safari and Chrome */
     -moz-transform-origin:0% 0%; /* Firefox */
@@ -55,9 +52,8 @@ body, body * {
 	height: 100%;
 	top: 0px;
 	left: 0px;
-	background-color: #FFF;
 	z-index: 100;
-	background: $prettyBlue; // url(background.jpg);
+	background: $bannerBackColor; // url(background.jpg);
 }
 
 /* Invisible button for background clickthrough. */
