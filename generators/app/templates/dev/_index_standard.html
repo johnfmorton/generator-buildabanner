@@ -14,44 +14,11 @@
         border: 0;
      }
     </style>
+    <!-- Update this click through URL & also update the click through in the noscript tag at the end of this page for the backup image -->
     <script type="text/javascript">
       var clickTag = "http://example.com";
     </script>
     <script language="javascript">
-
-    function pageLoadedHandler() {
-        if (isElementVisible( document.getElementById("container_ad") )) {
-            adVisibilityHandler();
-        } else {
-            onVisibilityChange(document.getElementById("container_ad"), adVisibilityHandler);
-        }
-    }
-
-    function isElementVisible(el) {
-        var rect     = el.getBoundingClientRect(),
-            vWidth   = window.innerWidth || doc.documentElement.clientWidth,
-            vHeight  = window.innerHeight || doc.documentElement.clientHeight,
-            efp      = function (x, y) { return document.elementFromPoint(x, y) };
-
-        // Return false if it's not in the viewport
-        if (rect.right < 0 || rect.bottom < 0
-                || rect.left > vWidth || rect.top > vHeight)
-            return false;
-
-        // Return true if any of its four corners are visible
-        return (
-              el.contains(efp(rect.left,  rect.top))
-          ||  el.contains(efp(rect.right, rect.top))
-          ||  el.contains(efp(rect.right, rect.bottom))
-          ||  el.contains(efp(rect.left,  rect.bottom))
-        );
-    }
-
-    function onVisibilityChange (el, callback) {
-        return function () {
-            console.log('visibility ' + isElementInViewport(el));
-        }
-    }
 
     function _politeLoad(urls, onComplete) {
         var l = urls.length,
@@ -90,7 +57,7 @@
         document.getElementsByTagName("head")[0].appendChild(script);
     }
 
-    function adVisibilityHandler() {
+    function pageLoadedHandler() {
         // Now that the ad is actual in a visible area, let's start this party.
 
         /*
