@@ -71,19 +71,27 @@ module.exports = yeoman.generators.Base.extend({
                 case '300x600':
                     props.bannerWidth = 298;
                     props.bannerHeight = 598;
+                    props.actualBannerWidth = 300;
+                    props.actualBannerHeight = 600;
                     break;
                 case '728x90':
                     props.bannerWidth = 726;
                     props.bannerHeight = 88;
+                    props.actualBannerWidth = 728;
+                    props.actualBannerHeight = 90;
                     break;
                 case '160x600':
                     props.bannerWidth = 158;
                     props.bannerHeight = 598;
+                    props.actualBannerWidth = 160;
+                    props.actualBannerHeight = 600;
                     break;
                 case '300x250':
                 default:
                     props.bannerWidth = 298;
                     props.bannerHeight = 248;
+                    props.actualBannerWidth = 300;
+                    props.actualBannerHeight = 250;
                     break;
             }
 
@@ -144,7 +152,9 @@ module.exports = yeoman.generators.Base.extend({
             );
             // process and copy the dev/index.html
             var indexOptions = {
-                title: this.props.bannerName
+                //title: this.props.bannerName,
+                actualBannerWidth: this.props.actualBannerWidth,
+                actualBannerHeight: this.props.actualBannerHeight
             }
             this.fs.copyTpl(
                 this.templatePath('dev/_index' + bannerSuffix + '.html'),
