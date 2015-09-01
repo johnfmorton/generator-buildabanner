@@ -5,13 +5,14 @@
   "description": "<%= bannerDesc %>",
   "main": "index.html",
   "keywords": [
-    "doubleclick",
+    "banner",
     "html"
   ],
   "devDependencies": {
     "del": "^1.2.0",
     "gulp": "^3.9.0",
     "gulp-connect": "^2.2.0",
+    "gulp-filesize": "0.0.6",
     "gulp-header": "^1.2.2",
     "gulp-minify-html": "^1.0.4",
     "gulp-minify-inline": "^0.1.1",
