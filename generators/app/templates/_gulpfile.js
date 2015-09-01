@@ -1,6 +1,9 @@
 // DoubleClick HTML polite banner
 // <%= creativeName %>
-//
+
+// Rename the archive that will be created here
+var archiveName = '<%= archiveName %>';
+
 // dependencies
 var gulp = require('gulp');
 var gutil = require('gulp-util');
@@ -15,6 +18,7 @@ var open = require('gulp-open');
 var zip = require('gulp-zip');
 var runSequence = require('run-sequence');
 var header = require('gulp-header');
+var filesize = require('gulp-filesize');
 
 // read in the package file
 var pkg = require('./package.json');
@@ -84,7 +88,7 @@ gulp.task('sass:dev', function() {
     return gulp.src('dev/style.scss')
         .pipe(sass({
             outputStyle: "expanded"
-        }))
+        }).on('error', sass.logError))
         .pipe(rename('style.css'))
         .pipe(gulp.dest('dev'))
         .pipe(connect.reload());;
@@ -94,7 +98,7 @@ gulp.task('sass:dist', function() {
     return gulp.src('dev/style.scss')
         .pipe(sass({
             outputStyle: "compressed"
-        }))
+        }).on('error', sass.logError))
         .pipe(header(bannerMessageJsCss, {
             pkg: pkg
         }))
@@ -151,8 +155,26 @@ gulp.task('copy-to-dist-folder', function() {
 
 gulp.task('compress', function() {
     return gulp.src('dist/*')
-        .pipe(zip('<%= archiveName %>'))
+        // for quick access, you can change this
+        // name at the top of this file
+        .pipe(zip(archiveName))
+        .pipe(filesize())
         .pipe(gulp.dest('delivery'));
+});
+
+
+gulp.task('archive', function() {
+    // make a zip all the files, including dev folder, for archiving the banner
+   var success = gulp.src(['gulpfile.js', 'package.json', '*.sublime-project', 'dev/*', 'dist/*', 'delivery/*'], {cwdbase: true})
+        // for quick access, you can change this
+        // name at the top of this file
+        .pipe(zip('archive-'+archiveName))
+        .pipe(gulp.dest('archive'));
+    gutil.log('--------------------------------');
+    gutil.log('Your banner has been archived in');
+    gutil.log('archive/'+ gutil.colors.yellow('archive-'+archiveName) );
+    gutil.log('--------------------------------');
+    return success;
 });
 
 gulp.task('basic-reload', function() {
@@ -182,10 +204,12 @@ gulp.task('finalize', ['compress']);
 gulp.task('help', function() {
     gutil.log(gutil.colors.red('buildabanner'), 'help');
     gutil.log('--------------------------');
-    gutil.log('There are 2 basic commands.');
+    gutil.log('There are 3 basic commands.');
     gutil.log(gutil.colors.yellow('gulp'), ': for dev use, spins up server w livereload as you edit files');
-    gutil.log(gutil.colors.yellow('gulp build'), ': minifies files to', gutil.colors.red('dist'), 'directory');
-    gutil.log('and zips same files in', gutil.colors.red('delivery'), 'directory');
+    gutil.log(gutil.colors.yellow('gulp build'), ': minifies files from the dev directory into the', gutil.colors.red('dist'), 'directory');
+    gutil.log('and creates a zip of these files in', gutil.colors.red('delivery'), 'directory');
+    gutil.log(gutil.colors.yellow('gulp archive'), 'takes files from the '+ gutil.colors.red('dev'), 'directory' + ' plus other important files');
+    gutil.log('and zips them in the', gutil.colors.red('archive'), 'directory for archival purposes.');
     gutil.log('--------------------------');
 });
 
