@@ -149,7 +149,7 @@ gulp.task('open', function() {
 });
 
 gulp.task('copy-to-dist-folder', function() {
-    return gulp.src(['dev/index.html', 'dev/style.css', 'dev/*.png', 'dev/*.jpg', 'dev/*.gif', 'dev/script.js'])
+    return gulp.src(['dev/index.html', 'dev/style.css', 'dev/*.png', 'dev/*.jpg', 'dev/*.gif', 'dev/script.js', '!dev/comp*'])
         .pipe(gulp.dest('dist'));
 });
 
