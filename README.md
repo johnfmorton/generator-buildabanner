@@ -28,7 +28,7 @@ To get started use `yo buildabanner` and answer the prompts.
 
 `gulp` : This is the most basic command. It will spin up a server in your 'dev' folder. It will compile your SCSS into CSS. It will also watch for changes in the index.html, scripts.js and style.scss files and reload Google Chrome.
 
-`gulp build` : This command will create a 'dist' folder and fill it with minified versions of your files. It will also compress these same files into a zip file in the 'delivery' folder.
+`gulp build` : This command will create a 'dist' folder and fill it with minified versions of your files. It will also compress these same files into a zip file in the 'delivery' folder. NOTE: If you've used files starting with "comp", like "comp1.png" or "comp2.jpg", which can be used for positioning elements in your banner, they will *not* be included in your 'dist' folder. This is important to know if you happen to have a file called "competition.jpg" in your banner build because it will excluded.
 
 `gulp archive` : This command will create an 'archive' folder and a single zip file that contains the contents of your *dev*, *dist* and *delivery* directories plus your *package.json*, *gulpfile.js* and your Sublime Text project file. These are the necessary files to archive your banner once it is finished. (Your node_modules directory can be recreated later with `npm install`.)
 
