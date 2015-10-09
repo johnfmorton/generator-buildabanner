@@ -20,7 +20,7 @@ module.exports = yeoman.generators.Base.extend({
             type: 'input',
             name: 'bannerName',
             filter: function(answer) { return camelCase(answer) },
-            message: 'Banner name (camelCase):',
+            message: 'Banner name (no spaces):',
             default: this.appname
         }, {
             type: 'input',
@@ -43,7 +43,7 @@ module.exports = yeoman.generators.Base.extend({
             type: 'confirm',
             name: 'includeGsap',
             message: 'Include GSAP for offline use?',
-            default: true
+            default: false
         }, {
             when: function (answers) {
                 return answers.bannerType === 'DoubleClick';
@@ -59,9 +59,9 @@ module.exports = yeoman.generators.Base.extend({
         }, {
             type: 'input',
             name: 'archiveName',
-            message: 'When this ad is zipped, what should it be called? ',
+            message: 'Ad zip archive name? (Do not include .zip)',
             default: function(answers) {
-                return answers.bannerName + "-" + answers.bannerSize + ".zip"
+                return answers.bannerName + "-" + answers.bannerSize
             }
         }];
 
@@ -152,7 +152,7 @@ module.exports = yeoman.generators.Base.extend({
             );
             // process and copy the dev/index.html
             var indexOptions = {
-                //title: this.props.bannerName,
+                bannerName: this.props.bannerName,
                 actualBannerWidth: this.props.actualBannerWidth,
                 actualBannerHeight: this.props.actualBannerHeight
             }

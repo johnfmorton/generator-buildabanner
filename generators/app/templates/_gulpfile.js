@@ -157,7 +157,7 @@ gulp.task('compress', function() {
     return gulp.src('dist/*')
         // for quick access, you can change this
         // name at the top of this file
-        .pipe(zip(archiveName))
+        .pipe(zip(archiveName+'.zip' ))
         .pipe(filesize())
         .pipe(gulp.dest('delivery'));
 });
@@ -168,11 +168,11 @@ gulp.task('archive', function() {
    var success = gulp.src(['gulpfile.js', 'package.json', '*.sublime-project', 'dev/*', 'dist/*', 'delivery/*'], {cwdbase: true})
         // for quick access, you can change this
         // name at the top of this file
-        .pipe(zip('archive-'+archiveName))
+        .pipe(zip('archive-'+archiveName+'.zip'))
         .pipe(gulp.dest('archive'));
     gutil.log('--------------------------------');
     gutil.log('Your banner has been archived in');
-    gutil.log('archive/'+ gutil.colors.yellow('archive-'+archiveName) );
+    gutil.log('archive/'+ gutil.colors.yellow('archive-'+archiveName+'.zip') );
     gutil.log('--------------------------------');
     return success;
 });
