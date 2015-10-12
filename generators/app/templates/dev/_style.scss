@@ -31,19 +31,23 @@ body, body * {
     // size to accommodate the 1px border on the ad
 	width: <%= bannerWidth %>px;
 	height: <%= bannerHeight %>px;
+    overflow: hidden;
 	border:1px solid #666666;
 	top: 0px;
 	left: 0px;
 	margin: auto;
 
-	-webkit-transform : translateZ(0);
-    -o-transform : translateZ(0);
-    -moz-transform : translateZ(0);
-    transform : translateZ(0);
+    // these are only useful in rare circumstances
+    // so they are commented out
+    // 
+    // -webkit-transform : translateZ(0);
+    // -o-transform : translateZ(0);
+    // -moz-transform : translateZ(0);
+    // transform : translateZ(0);
 
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    -ms-backface-visibility: hidden;
+    // -webkit-backface-visibility: hidden;
+    // -moz-backface-visibility: hidden;
+    // -ms-backface-visibility: hidden;
 }
 
 #content_ad {
