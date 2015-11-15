@@ -58,6 +58,18 @@ body, body * {
 	left: 0px;
 	z-index: 100;
 	background: $bannerBackColor; // url(background.jpg);
+    // If you put a single sprite sheet into all of your
+    // div tags, you can effeciently put set the background 
+    // image of all child dives this this rule below
+    // You will need to set the background position,
+    // width and height on the individual divs though
+    // div {
+    //     opacity: 0;
+    //     position: absolute;
+    //     background-image: url('sprite.png');
+    //     background-repeat: no-repeat;
+    //     background-size: 000px 000px;
+    // }
 }
 
 /* Invisible button for background clickthrough. */
