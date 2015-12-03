@@ -1,6 +1,6 @@
 {
   "name": "generator-buildabanner",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Yeoman generator to get an HTML banner, standard or DoubleClick Studio, started using Gulp",
   "license": "MIT",
   "main": "app/index.js",
