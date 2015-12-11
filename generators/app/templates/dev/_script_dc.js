@@ -9,7 +9,6 @@ var bgExit;
 // var someElementInHTML;
 
 //Function to run with any animations starting on load, or bringing in images etc
-// bannerInit is
 bannerInit = function(){
 
     //Assign All the elements to the element on the page

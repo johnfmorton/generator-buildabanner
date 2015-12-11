@@ -1,10 +1,13 @@
 {
   "name": "generator-buildabanner",
-  "version": "0.2.4",
-  "description": "Yeoman generator to get an HTML banner, standard or DoubleClick Studio, started using Gulp",
+  "version": "0.3.0",
+  "description": "Yeoman generator to start an HTML banner, standard, DoubleClick Studio, or TruEffect using Gulp",
   "license": "MIT",
   "main": "app/index.js",
-  "repository": "johnfmorton/generator-buildabanner",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnfmorton/generator-buildabanner"
+  },
   "author": {
     "name": "John F Morton",
     "email": "john@johnfmorton.com",
@@ -21,7 +24,9 @@
     "standard banner",
     "clickTag",
     "doubleclick",
+    "trueffect",
     "advertising",
+    "gasp",
     "gulp",
     "banner"
   ],

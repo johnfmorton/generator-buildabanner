@@ -31,7 +31,7 @@ module.exports = yeoman.generators.Base.extend({
             type: 'list',
             name: 'bannerType',
             message: 'What type of banner is this?',
-            choices: ['DoubleClick', 'Standard'],
+            choices: ['Standard', 'DoubleClick', 'TruEffect'],
             default: 'Standard'
         }, {
             type: 'list',
@@ -112,6 +112,9 @@ module.exports = yeoman.generators.Base.extend({
         app: function() {
             var bannerSuffix;
             switch(this.props.bannerType) {
+                case "TruEffect":
+                bannerSuffix = "_trueffect";
+                break;
                 case "DoubleClick":
                 bannerSuffix = "_dc";
                 break;
@@ -134,10 +137,12 @@ module.exports = yeoman.generators.Base.extend({
             var gulpfileOptions = {
                 creativeName: this.props.bannerName,
                 archiveName: this.props.archiveName,
+                // this "openTag" variable is used to get a
+                // reserved character set, <%=, into the gulpfile template
                 openTag: '<%='
             }
             this.fs.copyTpl(
-                this.templatePath('_gulpfile.js'),
+                this.templatePath('_gulpfile' + bannerSuffix + '.js'),
                 this.destinationPath('gulpfile.js'),
                 gulpfileOptions
             );
@@ -145,6 +150,17 @@ module.exports = yeoman.generators.Base.extend({
             this.fs.copy(
                 this.templatePath('dev/!(_index.html|_*.*|*.src)'),
                 this.destinationPath('dev')
+            );
+            // copy only select contents from the 'backupImages' folder
+            this.fs.copy(
+                // only copy the correct size of backup image to folder
+                this.templatePath('backupImage/backup-'+this.props.bannerSize+'.gif'),
+                this.destinationPath('backupImage/backup.gif')
+            );
+            // copy the correct README file
+            this.fs.copy(
+                this.templatePath('dev/_README' + bannerSuffix + '.md'),
+                this.destinationPath('README.md')
             );
             var scriptOptions = {
                 bannerName: this.props.bannerName,
@@ -215,7 +231,7 @@ module.exports = yeoman.generators.Base.extend({
                 'saveDev': true
             });
         };
-
+        // attempt to run NPM install automatically
         this.npmInstall();
     },
 

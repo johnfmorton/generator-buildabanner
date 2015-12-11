@@ -25,5 +25,10 @@
     "gulp-zip": "^3.0.2",
     "run-sequence": "^1.1.2"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnfmorton/generator-buildabanner"
+  },
+  "license": "MIT",
   "dependencies": {}
 }

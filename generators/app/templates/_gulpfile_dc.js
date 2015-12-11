@@ -122,7 +122,8 @@ gulp.task('minify-html', function() {
 
 gulp.task('del', function() {
     del([
-        'dist/*'
+        'dist/*',
+        'archive/*'
     ])
 });
 
@@ -157,7 +158,7 @@ gulp.task('compress', function() {
     return gulp.src('dist/*')
         // for quick access, you can change this
         // name at the top of this file
-        .pipe(zip(archiveName+'.zip' ))
+        .pipe(zip(archiveName+'.zip'))
         .pipe(filesize())
         .pipe(gulp.dest('delivery'));
 });
@@ -188,13 +189,22 @@ gulp.task('watch', function() {
 });
 
 gulp.task('build', function(callback) {
-    runSequence('del', 'copy-to-dist-folder', ['minify-html'], ['minify-inline', 'sass:dist'], 'uglify:dist', ['compress'],
+    runSequence('del', 'copy-to-dist-folder', ['minify-html'], ['minify-inline', 'sass:dist'], ['uglify:dist'], ['compress'], 'copyBackupFile',
         callback);
 });
 
 gulp.task('serve', function(callback) {
     runSequence('sass:dev', ['connect'], ['open', 'watch'],
         callback);
+});
+
+gulp.task('copyBackupFile', function() {
+    var sourceFiles = gulp.src(['backupImage/*.png', 'backupImage/*.jpg', 'backupImage/*.gif']);
+    return gulp.src(['backupImage/*.png', 'backupImage/*.jpg', 'backupImage/*.gif'])
+    .pipe(rename({
+        basename: archiveName + '-backup'
+        }))
+    .pipe(gulp.dest('delivery'));
 });
 
 // Depricated: no longer needed because

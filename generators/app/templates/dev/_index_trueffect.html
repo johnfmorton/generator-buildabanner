@@ -1,0 +1,112 @@
+<!-- HTML 5 Ad Template from DoubleClick by Google // modified for TruEffect -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title><%= bannerName %></title>
+    <meta name="ad.size" content="width=<%= actualBannerWidth %>,height=<%= actualBannerHeight %>">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style type="text/css">
+    #container_ad {
+        z-index: 20
+    }
+    button {
+        background: none;
+        outline: 0;
+        border: 0;
+     }
+    </style>
+    <!-- This is the TruEffect clickThru javascript -->
+    <script type="text/javascript" src="https://ad.adlegend.com/cdn/trueffect/te_html.min.js"></script>
+
+    <script language="javascript">
+
+    function _politeLoad(urls, onComplete) {
+        var l = urls.length,
+            loaded = 0,
+            checkProgress = function() {
+                if (++loaded === l && onComplete) {
+                    onComplete();
+                }
+            },
+            i;
+        for (i = 0; i < l; i++) {
+            _loadScript(urls[i], checkProgress);
+        }
+    }
+
+    function _loadScript(url, callback){
+
+        var script = document.createElement("script")
+        script.type = "text/javascript";
+
+        if (script.readyState){  //IE
+            script.onreadystatechange = function(){
+                if (script.readyState == "loaded" ||
+                        script.readyState == "complete"){
+                    script.onreadystatechange = null;
+                    callback();
+                }
+            };
+        } else {  //Others
+            script.onload = function(){
+                callback();
+            };
+        }
+
+        script.src = url;
+        document.getElementsByTagName("head")[0].appendChild(script);
+    }
+
+    function pageLoadedHandler() {
+        // Now that the ad is actual in a visible area, let's start this party.
+
+        /*
+        http://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/plugins/CSSPlugin.min.js
+        http://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TimelineLite.min.js
+
+        http://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/easing/EasePack.min.js
+        http://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TweenLite.min.js
+        */
+
+        //now you can just feed stuff into that one function and give it a callback...
+        _politeLoad(['//cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TweenLite.min.js',
+            '//cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TimelineLite.min.js',
+            '//cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/plugins/CSSPlugin.min.js',
+            '//cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/easing/EasePack.min.js',
+            'script.js'
+        ], function() {
+            console.log('ready');
+            bannerInit();
+        });
+
+        //Load in CSS
+        var extCSS = document.createElement('link');
+        extCSS.setAttribute("rel", "stylesheet");
+        extCSS.setAttribute("type", "text/css");
+        extCSS.setAttribute("href", "style.css");
+        document.getElementsByTagName("head")[0].appendChild(extCSS);
+        document.getElementById("container_ad").style.opacity = 1;
+        document.getElementById("container_ad").style.display = "block";
+    }
+    </script>
+</head>
+
+<body onload="pageLoadedHandler();">
+    <div id="container_ad">
+        <div id="content_ad">
+            <!-- Your banner ad content goes here -->
+            <div id="hd1">Headline One</div>
+            <div id="hd2">More words here.</div>
+            <div id="hd3">Yet more words.</div>
+        </div>
+        <button id="background_exit_ad"></button>
+    </div>
+    <script type="text/javascript">
+        document.getElementById("background_exit_ad").onclick = function() {
+            te_html.click('clickTAG','http://example.com');
+        }
+    </script>
+</body>
+
+</html>
