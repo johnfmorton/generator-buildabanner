@@ -166,7 +166,7 @@ gulp.task('compress', function() {
 
 gulp.task('archive', function() {
     // make a zip all the files, including dev folder, for archiving the banner
-   var success = gulp.src(['gulpfile.js', 'package.json', '*.sublime-project', 'dev/*', 'dist/*', 'delivery/*'], {cwdbase: true})
+   var success = gulp.src(['gulpfile.js', 'package.json', '*.sublime-project', 'dev/*', 'dist/*', 'backupImage/*', 'delivery/*'], {cwdbase: true})
         // for quick access, you can change this
         // name at the top of this file
         .pipe(zip('archive-'+archiveName+'.zip'))
