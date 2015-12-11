@@ -8,16 +8,22 @@ Begin development by typing "**gulp**" into your command line. This should spin 
 
 If you use Sublime Text, open the mybanner.sublime-project file and you can quickly begin editing your banner in the "Banner dev" folder in the left hand column of Sublime Text project. 
 
-As you make changes to the index.html, script.js and style.scss files, your browser will update and show you the changes you've made. The scss file is converted to CSS on the fly.
+As you make changes to the *index.html*, *script.js* and *style.scss* files, your browser will update and show you the changes you've made. The SCSS file is converted to CSS on the fly. Do **not** edit the CSS file directly because it will be overwritten.
 
 ## The backup image
 
-Backup images are typically required for DoubleClick Studio banners.
+Backup images are required for DoubleClick Studio banners.
 
-The *Build A Banner* workflow can assit in preparing a backup image for delivery. Make an **optimized** backup image for your banner and store it in the 'backupImages' directory you find along side your 'dev' directory. (*Build A Banner* will not optimize the image for you.) If a gif, jpg, or png file in that directory, the image will be renamed based on the name you've given the banner and it will be place alongside the zip file in the delivery folder. 
+The *Build A Banner* workflow can assit in preparing a backup image for delivery. Make an **optimized** backup image for your banner and store it in the 'backupImages' directory found along side the 'dev' directory. (*Build A Banner* will not optimize the image for you.) You can have *only one* image in the backup directory. The name of your backup image can be anything you want as long as the extension is correct. For example, you can simply name it 'backup.gif' or 'backup.jpg'. The *Build A Banner* workflow will rename your backup image properly when it builds out your banner for delivery.  
 
 ## Building files for delivery
 
 When you're ready to ready to build out your banner to show your client or deliver it to a media company, you use the "**gulp build**" command. This will take the contents of your 'dev' directory and minify each file. The 'dist' folder will then contain these minified files. You can upload these to a preview server to share with a client. In the 'delivery' you will also find these files zipped and ready to upload into DoubleClick Studio. If you've included the backup image, it will renamed appropriately and be sitting next to the zip file. It will contain word 'backup' in the filename and DoubleClick Studio should recognize it as the backup image automatically in most cases.
+
+## Archiving a banner
+
+After your banner is delivered, you can make an archive of your project with the "**gulp archive**" command. This will create a ZIP file in an *archive* directory within your project structure. The archive-myproject.zip file will contain the files you would need to recreate the banner again in the future. You only need to keep only this ZIP file in our project archives which will save storage space. 
+
+To recreate the full project, unzip this archive file and type 'npm init' and a full working *Build a Banner* project will be recreated. 
 
 Happy building.
