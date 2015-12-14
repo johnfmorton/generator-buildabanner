@@ -84,20 +84,27 @@
         // finally start the banner
 
         /*
-        Here are the CDN links of the GSAP libraries we're going to load in:
 
+        You can import files anyway you want, like from the Greensock CDN
         http://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/plugins/CSSPlugin.min.js
         http://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TimelineLite.min.js
         http://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/easing/EasePack.min.js
         http://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TweenLite.min.js
+
+        Google now hosts a copy of TweenMax, so we now use that instead.
+        https://s0.2mdn.net/ads/studio/cached_libs/tweenmax_1.18.0_499ba64a23378545748ff12d372e59e9_min.js
+
+        What are the other Google hosted libraries? See here:
+        https://support.google.com/richmedia/answer/6307288?hl=en
+
+        PreloadJS from the CreateJS is a common one we use:
+        https://s0.2mdn.net/ads/studio/cached_libs/preloadjs_0.6.1_ab03d7dc94f6d4fae428f99662cd5819_min.js
+
         */
 
         // we'll feed these into the _politeLoad helper function
         // and give it a callback, bannerInit which lives in the script.js file
-        _politeLoad(['//cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TweenLite.min.js',
-            '//cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TimelineLite.min.js',
-            '//cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/plugins/CSSPlugin.min.js',
-            '//cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/easing/EasePack.min.js',
+        _politeLoad(['//s0.2mdn.net/ads/studio/cached_libs/tweenmax_1.18.0_499ba64a23378545748ff12d372e59e9_min.js',
             'script.js'
         ], function() {
             console.log('Banner is ready to be initialized.');
