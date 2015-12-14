@@ -31,7 +31,7 @@ module.exports = yeoman.generators.Base.extend({
             type: 'list',
             name: 'bannerType',
             message: 'What type of banner is this?',
-            choices: ['Standard', 'DoubleClick', 'TruEffect'],
+            choices: ['Standard', 'AdWords', 'DoubleClick', 'TruEffect'],
             default: 'Standard'
         }, {
             type: 'list',
@@ -112,6 +112,9 @@ module.exports = yeoman.generators.Base.extend({
         app: function() {
             var bannerSuffix;
             switch(this.props.bannerType) {
+                case "AdWords":
+                bannerSuffix = "_adwords";
+                break;
                 case "TruEffect":
                 bannerSuffix = "_trueffect";
                 break;
@@ -189,6 +192,7 @@ module.exports = yeoman.generators.Base.extend({
                 bannerHeight: this.props.bannerHeight
             }
             this.fs.copyTpl(
+                // there is only a single style file for all banner types
                 this.templatePath('dev/_style.scss'),
                 this.destinationPath('dev/style.scss'),
                 styleOptions

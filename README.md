@@ -1,6 +1,6 @@
 # generator-buildabanner 
 
-This is a [Yeoman](http://yeoman.io) generator to get a starter standard or DoubleClick banner scaffolded out quickly.
+This is a [Yeoman](http://yeoman.io) generator to get a starter standard, AdWords, TruEffect or DoubleClick banner scaffolded out quickly.
 
 ## Let me show you how this works.
 
@@ -10,7 +10,7 @@ Click the image for a video walk through.
 
 ## Notes
 
-This is a work in progress. I refine it as I discover better processes. It is an opinionated workflow to speed the production of building a banner. It includes options for HTML banners for DoubleClick Studio and standard HTML banners using a clickTag.
+This is an evolving work in progress. I refine it as I discover better processes. It is an opinionated workflow to speed the production of building a banner. It includes options for HTML banners for standard, AdWords, TruEffect or DoubleClick HTML banners.
 
 ## Basic usage
 
@@ -49,6 +49,7 @@ Below are some goal posts for the future of this workflow.
 1. I may add an option to automatically include the downloaded Greensock files into the HTML by doing something like `gulp --offline`. I'm still deciding the approach I want to take for this though. So far, the CDN has worked best for me.
 2. I'm considering adding image optimization, but I currently like to have complete control of my images, so that is not high on my list.
 3. Add better size reporting. I'm looking at https://www.npmjs.com/package/gulp-sizereport/ and https://www.npmjs.com/package/gulp-size/ for this currently. I've got basic file size reporting in the `gulp build` command, but visually it is not differentiated enough for my taste.
+4. More ad formats to be added as I run across them.
 
 ## License
 
