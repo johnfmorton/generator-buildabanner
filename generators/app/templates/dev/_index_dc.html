@@ -5,7 +5,7 @@
 <head>
     <!-- Studio Enabler Required -->
     <!-- this was updated to work on http or https by removing the protocal entirely -->
-    <script src="https://s0.2mdn.net/ads/studio/Enabler.js"></script>
+
 
    <!--
     For offline use;
@@ -14,6 +14,7 @@
      -->
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script src="//s0.2mdn.net/ads/studio/Enabler.js"></script>
     <style type="text/css">
     #container_ad {
         display: none;
@@ -29,12 +30,13 @@
     // Initialize Enabler - DoubleClick referrs to this as the most
     // important piece of code in your banner. If it's not here
     // you don't have a DoubleClick ad
-    if (Enabler.isInitialized()) {
-        init();
-    } else {
-        Enabler.addEventListener(studio.events.StudioEvent.INIT, init);
+    window.onload = function() {
+        if (Enabler.isInitialized()) {
+            init();
+        } else {
+            Enabler.addEventListener(studio.events.StudioEvent.INIT, init);
+        }
     }
-
     // init() will only be run once the Enabler is initialized
     function init() {
         // Enabler provides ways for us to check status of the page
