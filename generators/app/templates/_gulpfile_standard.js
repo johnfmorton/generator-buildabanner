@@ -9,8 +9,7 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var uglify = require('gulp-uglify');
 var sass = require('gulp-sass');
-var minifyHTML = require('gulp-minify-html');
-var minifyInline = require('gulp-minify-inline');
+var minifyHTML = require('gulp-htmlmin');
 var rename = require('gulp-rename');
 var del = require('del');
 var connect = require('gulp-connect');
@@ -65,24 +64,6 @@ gulp.task('uglify:dist', function() {
         .pipe(gulp.dest('dist/'));
 });
 
-// Uglify / Minify inline JS and CSS
-gulp.task('minify-inline', function() {
-    var opt = {
-        js: { // options for inline JS
-            mangle: true, // make shorter variable names
-            compress: {
-                drop_debugger: true, // drop debugger messages from code
-                drop_console: true // drop console messages from code
-            },
-            output: {
-                beautify: false // make code pretty? default is false
-            }
-        }
-    };
-    gulp.src('dist/*.html')
-        .pipe(minifyInline(opt))
-        .pipe(gulp.dest('dist/'))
-});
 
 gulp.task('sass:dev', function() {
     return gulp.src('dev/style.scss')
@@ -108,8 +89,15 @@ gulp.task('sass:dist', function() {
 
 gulp.task('minify-html', function() {
     var opts = {
-        conditionals: true,
-        spare: false
+        collapseWhitespace: true, // must be true if conservativeCollapse or preserveLineBreaks are used as true
+        conservativeCollapse: false, // true: collapse to 1 space (never remove it entirely)
+        preserveLineBreaks: false, // true: collapse to 1 line break (never remove it entirely)
+        useShortDoctype: true,
+        removeScriptTypeAttributes: true,
+        removeComments: true,
+        removeRedundantAttributes: true,
+        minifyJS: true, // minify Javascript in script elements and on* attributes
+        minifyCSS: true // minify CSS in style elements and style attributes
     };
 
     return gulp.src('dist/*.html')
@@ -189,7 +177,7 @@ gulp.task('watch', function() {
 });
 
 gulp.task('build', function(callback) {
-    runSequence('del', 'copy-to-dist-folder', ['minify-html'], ['minify-inline', 'sass:dist'], ['uglify:dist'], ['compress'], 'copyBackupFile',
+    runSequence('del', 'copy-to-dist-folder', 'minify-html', 'sass:dist', ['uglify:dist'], ['compress'], 'copyBackupFile',
         callback);
 });
 
