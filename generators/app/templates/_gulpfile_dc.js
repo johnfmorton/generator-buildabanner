@@ -18,6 +18,7 @@ var zip = require('gulp-zip');
 var runSequence = require('run-sequence');
 var header = require('gulp-header');
 var filesize = require('gulp-filesize');
+var replace = require('gulp-replace');
 
 // read in the package file
 var pkg = require('./package.json');
@@ -98,8 +99,9 @@ gulp.task('minify-html', function() {
         minifyJS: true, // minify Javascript in script elements and on* attributes
         minifyCSS: true // minify CSS in style elements and style attributes
     };
-
+    var consoleRegEx = /console\.(clear|count|debug|dir|dirxml|error|group|groupCollapsed|groupEnd|info|profile|profileEnd|time|timeEnd|timeStamp|trace|log|warn) *\(.*\);?/gi;
     return gulp.src('dist/*.html')
+        .pipe(replace(consoleRegEx, ''))
         .pipe(minifyHTML(opts))
         .pipe(header(bannerMessageHtml, {
             pkg: pkg
