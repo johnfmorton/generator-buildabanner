@@ -72,8 +72,7 @@ gulp.task('sass:dev', function() {
             outputStyle: "expanded"
         }).on('error', sass.logError))
         .pipe(rename('style.css'))
-        .pipe(gulp.dest('dev'))
-        .pipe(connect.reload());;
+        .pipe(gulp.dest('dev'));
 });
 
 gulp.task('sass:dist', function() {
@@ -176,6 +175,7 @@ gulp.task('basic-reload', function() {
 gulp.task('watch', function() {
     gulp.watch(['dev/*.html', 'dev/*.js'], ['basic-reload']);
     gulp.watch(['dev/*.scss'], ['sass:dev']);
+    gulp.watch(['dev/*.css'], ['basic-reload']);
 });
 
 gulp.task('build', function(callback) {
@@ -197,9 +197,8 @@ gulp.task('copyBackupFile', function() {
     .pipe(gulp.dest('delivery'));
 });
 
-// Depricated: no longer needed because
-// it is part of the 'build' sequence now.
-gulp.task('finalize', ['compress']);
+// Shortcut to build and archive all at once
+gulp.task('ba', ['build'],['archive']);
 
 gulp.task('help', function() {
     gutil.log(gutil.colors.red('buildabanner'), 'help');
