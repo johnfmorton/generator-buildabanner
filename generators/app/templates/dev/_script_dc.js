@@ -2,18 +2,20 @@
 // HTML5 Ad Template JS from DoubleClick by Google
 
 //Declaring elements from the HTML i.e. Giving them Instance Names like in Flash - makes it easier
-var container;
-var content;
+// var container;
+// var content;
 var bgExit;
 
 // var someElementInHTML;
 
 //Function to run with any animations starting on load, or bringing in images etc
 bannerInit = function(){
+    // adds class "loaded" to the body
+    // document.getElementsByTagName('body')[0].className+=' loaded';
 
     //Assign All the elements to the element on the page
-    container = document.getElementById('container_ad');
-    content = document.getElementById('content_ad');
+    // container = document.getElementById('container_ad');
+    // content = document.getElementById('content_ad');
     bgExit = document.getElementById('background_exit_ad');
     // someElementInHTML = document.getElementById('some_element_in_html');
 
