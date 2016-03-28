@@ -198,7 +198,7 @@ gulp.task('copyBackupFile', function() {
 });
 
 // Shortcut to build and archive all at once
-gulp.task('ba', ['build'],['archive']);
+gulp.task('ba', ['build', 'archive']);
 
 gulp.task('help', function() {
     gutil.log(gutil.colors.red('buildabanner'), 'help');
