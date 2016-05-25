@@ -79,16 +79,20 @@ body, body * {
     // }
 }
 
-/* Invisible button for background clickthrough. */
+/* Invisible button for background clickthrough.
+  The background url here is a hack to get around a stacking order
+  bug in Windows 8 IE10. For deatils see:
+  http://stackoverflow.com/questions/6914822/absolute-positioned-anchor-tag-with-no-text-not-clickable-in-ie
+*/
 #background_exit_ad {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	top: 0px;
-	left: 0px;
-	cursor: pointer;
-	opacity: 0;
-	z-index: 400;
+  background: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7") 0 0 repeat;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  cursor: pointer;
+  z-index: 400;
 }
 
 :focus {outline:none;}
