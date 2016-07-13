@@ -65,13 +65,13 @@
         /*
 
         You can import files anyway you want, like from the Greensock CDN
-        http://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/plugins/CSSPlugin.min.js
-        http://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TimelineLite.min.js
-        http://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/easing/EasePack.min.js
-        http://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TweenLite.min.js
+        http://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/plugins/CSSPlugin.min.js
+        http://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TimelineLite.min.js
+        http://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/easing/EasePack.min.js
+        http://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenLite.min.js
 
         Google now hosts a copy of TweenMax, so we now use that instead.
-        https://s0.2mdn.net/ads/studio/cached_libs/tweenmax_1.18.0_499ba64a23378545748ff12d372e59e9_min.js
+        https://s0.2mdn.net/ads/studio/cached_libs/tweenmax_1.18.5_23b0de6da0ee295131e32a500470610c_min.js
 
         What are the other Google hosted libraries? See here:
         https://support.google.com/richmedia/answer/6307288?hl=en
@@ -79,15 +79,55 @@
         PreloadJS from the CreateJS is a common one we use:
         https://s0.2mdn.net/ads/studio/cached_libs/preloadjs_0.6.2_d7b96570d4552592ae479162e546cb25_min.js
 
+        or from the createjs.com server at
+
+        https://code.createjs.com/preloadjs-0.6.2.min.js
+
         */
 
         //now you can just feed stuff into that one function and give it a callback...
-        _politeLoad(['https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/TweenMax.min.js',
+        _politeLoad([
+            //'https://code.createjs.com/preloadjs-0.6.2.min.js',
+            'https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js',
             'script.js'
         ], function() {
-            console.log('ready');
+            console.log('bannerInit');
             bannerInit();
+
+            // if you want to preload images
+            // 1. remove the bannerInit() above
+            // 2. in the _politeLoad list of JS files above, be sure to load the preloadjs library
+            // 3. uncomment out the preloadImage() and related event listener functions below
+            // 4. in the loadManifest list out the images you want to preload before animation begins in your banner
+            //
+            // preloadImages()
         });
+
+        // function preloadImages() {
+        //     console.log('preloadImages')
+        //     var queue = new createjs.LoadQueue();
+        //     queue.stopOnError = true;
+        //     // list the images you want to preload here
+        //     queue.loadManifest([
+        //         "myimage1.png",
+        //         "myimage2.jpg",
+        //     ]);
+        //     queue.on("complete", handleComplete, this);
+        //     queue.on("error", handleError, this);
+        //     queue.on("fileerror", handleFileError, this);
+        // }
+
+        // function handleComplete(e) {
+        //     console.log('complete', e);
+        //     bannerInit();
+        // }
+
+        // function handleError(e) {
+        //   console.log("error", e)
+        // }
+        // function handleFileError(e) {
+        //   console.log("handleFileError", e)
+        // }
 
         //Load in CSS
         var extCSS = document.createElement('link');
