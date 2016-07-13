@@ -2,38 +2,45 @@
 // <%= creativeName %>
 
 // Rename the archive that will be created here
-var archiveName = '<%= archiveName %>';
+const archiveName = '<%= archiveName %>';
 
 // dependencies
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var uglify = require('gulp-uglify');
-var sass = require('gulp-sass');
-var minifyHTML = require('gulp-htmlmin');
-var rename = require('gulp-rename');
-var del = require('del');
-var connect = require('gulp-connect');
-var open = require('gulp-open');
-var zip = require('gulp-zip');
-var runSequence = require('run-sequence');
-var header = require('gulp-header');
-var filesize = require('gulp-filesize');
-var replace = require('gulp-replace');
+const gulp = require('gulp');
+const gutil = require('gulp-util');
+const uglify = require('gulp-uglify');
+const sass = require('gulp-sass');
+const minifyHTML = require('gulp-htmlmin');
+const rename = require('gulp-rename');
+const del = require('del');
+const connect = require('gulp-connect');
+const open = require('gulp-open');
+const zip = require('gulp-zip');
+const runSequence = require('run-sequence');
+const header = require('gulp-header');
+const replace = require('gulp-replace');
+const htmlparser = require("htmlparser2");
+// used to guess expected size of banner based on the backup image
+const sizeOf = require('image-size');
+// used to get the GZIP size of the banner during the build process
+const size = require('gulp-size');
+const notify = require("gulp-notify");
+
+const fs = require('fs');
 
 // read in the package file
-var pkg = require('./package.json');
+const pkg = require('./package.json');
 
 // Banner message to be appended to minified files
-var nowDate = new Date();
+const nowDate = new Date();
 
-var bannerMessageHtml = ['<!--',
+const bannerMessageHtml = ['<!--',
     ' <%= openTag %> pkg.name %> - <%= openTag %> pkg.description %>',
     ' @version v<%= openTag %> pkg.version %>',
     ' @date ' + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() + "-" + nowDate.getFullYear() + " at " + nowDate.getHours() + ":" + nowDate.getMinutes() + ":" + nowDate.getSeconds(),
     ' -->',
     ''
 ].join('\n');
-var bannerMessageJsCss = ['/**',
+const bannerMessageJsCss = ['/**',
     ' * <%= openTag %> pkg.name %> - <%= openTag %> pkg.description %>',
     ' * @version v<%= openTag %> pkg.version %>',
     ' * @date ' + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() + "-" + nowDate.getFullYear() + " at " + nowDate.getHours() + ":" + nowDate.getMinutes() + ":" + nowDate.getSeconds(),
@@ -43,6 +50,69 @@ var bannerMessageJsCss = ['/**',
 
 
 // TASKS
+
+// CHECK task - reading index.html and then check the meta tag for size
+
+gulp.task('check', function() {
+    gutil.log( gutil.colors.yellow('******************************'));
+    gutil.log( gutil.colors.yellow('* Checking for banner errors *'));
+    gutil.log( gutil.colors.yellow('******************************'));
+    gutil.log( gutil.colors.yellow('* Scanning: ')+ gutil.colors.green('index.html') + gutil.colors.yellow(' for ad.size metadata *'));
+
+    // Read the index.html file in the dev folder
+    fs.readFile('dev/index.html', 'utf8', function (err,theFileContents) {
+      if (err) {
+        gutil.log( gutil.colors.red( '*** metadata ad.size validation error encountered ***') );
+        gutil.log( gutil.colors.red( err) );
+      }
+      var adSizeMetaData;
+      var parser = new htmlparser.Parser({
+        onopentag: function(name, attribs) {
+          //gutil.log('opentag');
+            if (name === "meta" && attribs.name === 'ad.size') {
+              gutil.log( gutil.colors.yellow('* Found ad.size metadata: ')+ gutil.colors.green(attribs.content) );
+              adSizeMetaData = attribs.content
+              //gutil.log(attribs.content);
+            }
+        },
+        ontext: function(text){
+          //console.log("-->", text);
+        },
+        }, {decodeEntities: true, recognizeSelfClosing: true});
+      parser.write(theFileContents);
+      parser.end();
+
+      if (adSizeMetaData) {
+        //gutil.log('adSizeMetaData: ' + adSizeMetaData)
+      } else {
+        gutil.log(gutil.colors.red("ERROR: The metadata ad.size was not found in dev\/index.html"))
+      }
+      // Get a list of files in the backupImage directory
+      var backupImages = fs.readdirSync('backupImage/');
+      // remove invisible files from list, ie. .DS_Store
+      backupImages = backupImages.filter(item => !(/(^|\/)\.[^\/\.]/g).test(item));
+
+      if (backupImages.length === 1) {
+        // if there is the expected 1 file, let's proceed
+        var expectedDimensions = sizeOf('backupImage/' + backupImages[0]);
+        var expectedDimensionsFormatted = 'width=' + expectedDimensions.width + ',height=' + expectedDimensions.height;
+        gutil.log('expected: ' + expectedDimensionsFormatted);
+        if (expectedDimensionsFormatted === adSizeMetaData) {
+            gutil.log(gutil.colors.green("SUCCESS: The metadata ad.size matched the dimensions of the backup image."));
+          } else {
+            gutil.log(gutil.colors.red("ERROR: The metadata ad.size did not match the dimensions of the backup image."))
+            gutil.log('expected: ' + gutil.colors.red(expectedDimensionsFormatted))
+            gutil.log('found   : ' + gutil.colors.red(adSizeMetaData))
+          }
+
+      } else {
+        gutil.log(gutil.colors.red("ERROR: Expected 1 image in backupImage directory but found " + backupImages.length))
+
+      }
+
+    });
+
+  })
 
 // Uglify external JS files
 gulp.task('uglify:dist', function() {
@@ -115,6 +185,14 @@ gulp.task('del', function() {
     ])
 });
 
+// remove the index.html file for delivery of TruEffect version of banner
+// since it was duplicated to frame.html per TruEffect specs
+gulp.task('delForTruEffectCleanup', function() {
+    del([
+        'dist/index.html'
+    ])
+});
+
 gulp.task('connect', function() {
     connect.server({
         root: ['dev'],
@@ -143,14 +221,18 @@ gulp.task('copy-to-dist-folder', function() {
 });
 
 gulp.task('compress', function() {
+    const s = size({showFiles: false, gzip: false, showTotal:false});
     return gulp.src('dist/*')
         // for quick access, you can change this
         // name at the top of this file
         .pipe(zip(archiveName+'.zip'))
-        .pipe(filesize())
-        .pipe(gulp.dest('delivery'));
+        .pipe(s)
+        .pipe(gulp.dest('delivery'))
+        .pipe(notify({
+          onLast: true,
+          message: function() { return archiveName + '.zip : ' + s.prettySize }
+        }));
 });
-
 
 gulp.task('archive', function() {
     // make a zip all the files, including dev folder, for archiving the banner
@@ -196,19 +278,13 @@ gulp.task('backupCopyForTruEffect', function() {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('delForTruEffectCleanup', function(callback) {
-    del([
-        'dist/index.html',
-    ], callback);
-});
-
 gulp.task('build', function(callback) {
     runSequence('del', 'copy-to-dist-folder', 'minify-html', 'sass:dist', 'uglify:dist', 'indexRenameForTruEffect', ['delForTruEffectCleanup'], ['backupCopyForTruEffect'], ['compress'],
         callback);
 });
 
 // Shortcut to build and archive all at once
-gulp.task('ba', function() {runSequence(['build'], ['archive'])});
+gulp.task('ba', function() {runSequence(['check'], ['build'], ['archive'])});
 
 gulp.task('help', function() {
     gutil.log(gutil.colors.red('buildabanner'), 'help');
