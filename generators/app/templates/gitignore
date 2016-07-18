@@ -8,7 +8,7 @@ Thumbs.db
 
 # Text editors/IDEs
 .idea
-*.sublime-*
+*.sublime-workspace
 *.tmproj
 
 # Node generated files
