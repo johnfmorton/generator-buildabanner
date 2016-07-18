@@ -13,11 +13,16 @@ describe('buildabanner:app', function () {
       .on('end', done);
   });
 
-  it('creates files', function () {
+  it('creates banner files', function () {
     assert.file([
       'package.json',
       '.editorconfig',
-      '.jshintrc'
+      '.jshintrc',
+      'gulpfile.js',
+      'dev/index.html',
+      'dev/script.js',
+      'dev/style.scss',
+      'backupImage/backup.gif'
     ]);
   });
 });
