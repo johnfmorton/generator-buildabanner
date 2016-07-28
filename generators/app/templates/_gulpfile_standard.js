@@ -208,12 +208,12 @@ gulp.task('open', function() {
 });
 
 gulp.task('copy-to-dist-folder', function() {
-    return gulp.src(['dev/index.html', 'dev/style.css', 'dev/*.png', 'dev/*.jpg', 'dev/*.gif', 'dev/*.svg', 'dev/script.js', '!dev/comp*'])
+    return gulp.src(['dev/index.html', 'dev/style.css', 'dev/*.mp4', 'dev/*.ogv', 'dev/*.ogg', 'dev/*.webm','dev/*.png', 'dev/*.jpg', 'dev/*.gif', 'dev/*.svg', 'dev/script.js', '!dev/comp*'])
         .pipe(gulp.dest('dist'));
 });
 
 gulp.task('compress', function() {
-    var s = size({showFiles: false, gzip: false, showTotal:false});
+    const s = size({showFiles: false, gzip: false, showTotal:false});
     return gulp.src('dist/*')
         // for quick access, you can change this
         // name at the top of this file
