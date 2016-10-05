@@ -1,6 +1,6 @@
 # generator-buildabanner 
 
-This is a [Yeoman](http://yeoman.io) generator to get a starter standard, AdWords, TruEffect or DoubleClick banner scaffolded out quickly.
+This is a [Yeoman](http://yeoman.io) generator to get a starter standard, AdWords, TruEffect, Sizemek or DoubleClick banner scaffolded out quickly.
 
 ## Let me show you how this works.
 
@@ -51,7 +51,7 @@ Both of these prompts for offline use default to "yes". The downloaded code is *
 Below are some goal posts for the future of this workflow.
 
 1. I may add an option to automatically include the downloaded Greensock files into the HTML by doing something like `gulp --offline`. I'm still deciding the approach I want to take for this though. So far, the CDN has worked best for me.
-2. Additional media vendor templates may be added in the future. Currently, I just use the "standard" template and modify it as needed when one of the existing ones isn't quite right for the needs of a job.
+2. Additional media vendor templates may be added in the future but the workflow now includes all the basis ones we generally use. Suggestions welcomed though. 
 
 ### Tips
 
