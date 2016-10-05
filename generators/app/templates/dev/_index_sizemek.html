@@ -1,0 +1,167 @@
+<!-- HTML 5 Ad Template from DoubleClick by Google // modified to remove DCS specific code for use as a standard banner -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title><%= bannerName %></title>
+    <meta name="ad.size" content="width=300,height=250">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style type="text/css">
+    #container_ad {
+        z-index: 20;
+    }
+    button {
+        background: none;
+        outline: 0;
+        border: 0;
+     }
+    </style>
+    <script src="EBLoader.js"></script>
+    <!-- There is no click thru URL in this file. It will handled in the Sizemek environment via the EBLoader file above and the EB.clickthrough() at the bottom of this HTML docuement -->
+    
+    <script language="javascript">
+
+    function _politeLoad(urls, onComplete) {
+        var l = urls.length,
+            loaded = 0,
+            checkProgress = function() {
+                if (++loaded === l && onComplete) {
+                    onComplete();
+                }
+            },
+            i;
+        for (i = 0; i < l; i++) {
+            _loadScript(urls[i], checkProgress);
+        }
+    }
+
+    function _loadScript(url, callback){
+
+        var script = document.createElement("script")
+        script.type = "text/javascript";
+
+        if (script.readyState){  //IE
+            script.onreadystatechange = function(){
+                if (script.readyState == "loaded" ||
+                        script.readyState == "complete"){
+                    script.onreadystatechange = null;
+                    callback();
+                }
+            };
+        } else {  //Others
+            script.onload = function(){
+                callback();
+            };
+        }
+
+        script.src = url;
+        document.getElementsByTagName("head")[0].appendChild(script);
+    }
+
+    function pageLoadedHandler() {
+        // Now that the ad is actual in a visible area, let's start this party.
+
+        /*
+
+        You can import files anyway you want, like from the Greensock CDN
+        http://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/plugins/CSSPlugin.min.js
+        http://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TimelineLite.min.js
+        http://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/easing/EasePack.min.js
+        http://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenLite.min.js
+
+        Google now hosts a copy of TweenMax, so we now use that instead.
+        https://s0.2mdn.net/ads/studio/cached_libs/tweenmax_1.18.5_23b0de6da0ee295131e32a500470610c_min.js
+
+        What are the other Google hosted libraries? See here:
+        https://support.google.com/richmedia/answer/6307288?hl=en
+
+        PreloadJS from the CreateJS is a common one we use:
+        https://s0.2mdn.net/ads/studio/cached_libs/preloadjs_0.6.2_d7b96570d4552592ae479162e546cb25_min.js
+
+        or from the createjs.com server at
+
+        https://code.createjs.com/preloadjs-0.6.2.min.js
+
+        */
+
+        //now you can just feed stuff into that one function and give it a callback...
+        _politeLoad([
+            //'https://code.createjs.com/preloadjs-0.6.2.min.js',
+            'https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.5/TweenMax.min.js',
+            'script.js'
+        ], function() {
+            console.log('bannerInit');
+            bannerInit();
+
+            // if you want to preload images
+            // 1. remove the bannerInit() above
+            // 2. in the _politeLoad list of JS files above, be sure to load the preloadjs library
+            // 3. uncomment out the preloadImage() and related event listener functions below
+            // 4. in the loadManifest list out the images you want to preload before animation begins in your banner
+            //
+            // preloadImages()
+        });
+
+        // function preloadImages() {
+        //     console.log('preloadImages')
+        //     var queue = new createjs.LoadQueue();
+        //     queue.stopOnError = true;
+        //     // list the images you want to preload here
+        //     queue.loadManifest([
+        //         "myimage1.png",
+        //         "myimage2.jpg",
+        //     ]);
+        //     queue.on("complete", handleComplete, this);
+        //     queue.on("error", handleError, this);
+        //     queue.on("fileerror", handleFileError, this);
+        // }
+
+        // function handleComplete(e) {
+        //     console.log('complete', e);
+        //     bannerInit();
+        // }
+
+        // function handleError(e) {
+        //   console.log("error", e)
+        // }
+        // function handleFileError(e) {
+        //   console.log("handleFileError", e)
+        // }
+
+        //Load in CSS
+        var extCSS = document.createElement('link');
+        extCSS.setAttribute("rel", "stylesheet");
+        extCSS.setAttribute("type", "text/css");
+        extCSS.setAttribute("href", "style.css");
+        document.getElementsByTagName("head")[0].appendChild(extCSS);
+        document.getElementById("container_ad").style.opacity = 1;
+        document.getElementById("container_ad").style.display = "block";
+    }
+    </script>
+</head>
+
+<body onload="pageLoadedHandler();">
+    <div id="container_ad">
+        <div id="content_ad">
+            <!-- Your banner ad content goes here -->
+            <div id="hd1">Headline One</div>
+            <div id="hd2">More words here.</div>
+            <div id="hd3">Yet more words.</div>
+        </div>
+        <button id="background_exit_ad"></button>
+    </div>
+    <script type="text/javascript">
+        document.getElementById("background_exit_ad").addEventListener("click", clickthrough);
+
+        function clickthrough() {
+            EB.clickthrough();
+        }
+    </script>
+    <!-- Remove the comment tags around the noscript area below if you would like to include a backup image within your banner build. This isn't typically done, but we've seen it requested by some clients. Doing a back up image this way impacts the K size of your banner build. Instead of doing backups this way, the are typically delivered as a separate standand-alone image. -->
+    <!-- You must create a backup image and include it here for users without JS -->
+    <!-- <noscript>
+        <a href="http://example.com"><img src="backupimage.jpg" width="300" height="250"></a>
+    </noscript> -->
+</body>
+
+</html>
