@@ -1,6 +1,6 @@
 # generator-buildabanner 
 
-This is a [Yeoman](http://yeoman.io) generator to get a starter standard, AdWords, TruEffect, Sizemek or DoubleClick banner scaffolded out quickly.
+This is a [Yeoman](http://yeoman.io) generator to get a starter standard, AdWords, TruEffect, Sizmek or DoubleClick banner scaffolded out quickly.
 
 ## Let me show you how this works.
 
