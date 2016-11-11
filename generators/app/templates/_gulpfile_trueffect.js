@@ -216,13 +216,13 @@ gulp.task('open', function() {
 });
 
 gulp.task('copy-to-dist-folder', function() {
-    return gulp.src(['dev/index.html', 'dev/style.css', 'dev/*.mp4', 'dev/*.ogv', 'dev/*.ogg', 'dev/*.webm','dev/*.png', 'dev/*.jpg', 'dev/*.gif', 'dev/*.svg', 'dev/script.js', '!dev/comp*'])
+    return gulp.src(['dev/index.html', 'dev/style.css', 'dev/**/*.mp4', 'dev/**/*.ogv', 'dev/**/*.ogg', 'dev/**/*.webm','dev/**/*.png', 'dev/**/*.jpg', 'dev/**/*.gif', 'dev/**/*.svg', 'dev/script.js', '!dev/comp*'])
         .pipe(gulp.dest('dist'));
 });
 
 gulp.task('compress', function() {
     const s = size({showFiles: false, gzip: false, showTotal:false});
-    return gulp.src('dist/*')
+    return gulp.src('dist/**/*')
         // for quick access, you can change this
         // name at the top of this file
         .pipe(zip(archiveName+'.zip'))
@@ -236,7 +236,7 @@ gulp.task('compress', function() {
 
 gulp.task('archive', function() {
     // make a zip all the files, including dev folder, for archiving the banner
-   var success = gulp.src(['gulpfile.js', 'package.json', '*.sublime-project', 'dev/*', 'dist/*', 'backupImage/*', 'delivery/*'], {cwdbase: true})
+   var success = gulp.src(['gulpfile.js', 'package.json', '*.sublime-project', 'dev/**/*', 'dist/**/*', 'backupImage/*', 'delivery/**/*'], {cwdbase: true})
         // for quick access, you can change this
         // name at the top of this file
         .pipe(zip('archive-'+archiveName+'.zip'))

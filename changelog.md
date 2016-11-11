@@ -2,6 +2,9 @@
 
 ## Changelog
 
+Version 0.10.1
+* Added support for nested folders in the "dev" folder. For example, if you stored your images in an "images" folder, they are now copied properly when you "gulp build" your files for delivery.
+
 Version 0.10.0
 * Added Sizemek support
 
