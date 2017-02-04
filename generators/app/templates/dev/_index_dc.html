@@ -29,6 +29,7 @@
         border: 0;
      }
     </style>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <script language="javascript">
     // Initialize Enabler - DoubleClick referrs to this as the most
     // important piece of code in your banner. If it's not here
@@ -114,13 +115,6 @@
             console.log('Banner is ready to be initialized.');
             bannerInit();
         });
-
-        // Load in CSS
-        var extCSS = document.createElement('link');
-        extCSS.setAttribute("rel", "stylesheet");
-        extCSS.setAttribute("type", "text/css");
-        extCSS.setAttribute("href", Enabler.getUrl("style.css"));
-        document.getElementsByTagName("head")[0].appendChild(extCSS);
 
         // The ad lives in the container_ad div. At the top of this
         // page, it was made invisible, now we can change the opacity

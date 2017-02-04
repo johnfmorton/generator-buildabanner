@@ -16,6 +16,7 @@
         border: 0;
      }
     </style>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <!-- Update this click through URL & also update the click through in the noscript tag at the end of this page for the backup image -->
     <script type="text/javascript">
       var clickTag = "http://example.com";
@@ -128,15 +129,6 @@
         // function handleFileError(e) {
         //   console.log("handleFileError", e)
         // }
-
-        //Load in CSS
-        var extCSS = document.createElement('link');
-        extCSS.setAttribute("rel", "stylesheet");
-        extCSS.setAttribute("type", "text/css");
-        extCSS.setAttribute("href", "style.css");
-        document.getElementsByTagName("head")[0].appendChild(extCSS);
-        document.getElementById("container_ad").style.opacity = 1;
-        document.getElementById("container_ad").style.display = "block";
     }
     </script>
 </head>

@@ -16,6 +16,7 @@
         border: 0;
      }
     </style>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <script type="text/javascript" src="https://secure-ds.serving-sys.com/BurstingScript/adKit/adkit.js"></script>
     <!-- There is no click thru URL in this file. It will handled in the Sizmek environment via the adkit.js file above and the EB.clickthrough() at the bottom of this HTML docuement -->
     
@@ -127,15 +128,6 @@
         // function handleFileError(e) {
         //   console.log("handleFileError", e)
         // }
-
-        //Load in CSS
-        var extCSS = document.createElement('link');
-        extCSS.setAttribute("rel", "stylesheet");
-        extCSS.setAttribute("type", "text/css");
-        extCSS.setAttribute("href", "style.css");
-        document.getElementsByTagName("head")[0].appendChild(extCSS);
-        document.getElementById("container_ad").style.opacity = 1;
-        document.getElementById("container_ad").style.display = "block";
     }
     </script>
 </head>
