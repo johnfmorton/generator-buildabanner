@@ -33,7 +33,7 @@ module.exports = yeoman.generators.Base.extend({
       type: 'list',
       name: 'bannerType',
       message: 'What type of banner is this?',
-      choices: ['Standard', 'AdWords', 'DoubleClick', 'TruEffect', 'Sizemek'],
+      choices: ['Standard', 'AdWords', 'DoubleClick', 'TruEffect', 'Sizmek'],
       default: 'Standard'
     }, {
       type: 'list',
@@ -129,8 +129,8 @@ module.exports = yeoman.generators.Base.extend({
         case "DoubleClick":
           bannerSuffix = "_dc";
           break;
-        case "Sizemek":
-          bannerSuffix = "_sizemek";
+        case "Sizmek":
+          bannerSuffix = "_sizmek";
           break;
         case "Standard":
         default:
@@ -162,7 +162,7 @@ module.exports = yeoman.generators.Base.extend({
       );
       // copy only select contents from the 'dev' folder
       this.fs.copy(
-        this.templatePath('dev/!(_index.html|_*.*|*.src|_EBLoader*)'),
+        this.templatePath('dev/!(_index.html|_*.*|*.src)'),
         this.destinationPath('dev')
       );
       // copy only select contents from the 'backupImages' folder
@@ -176,13 +176,6 @@ module.exports = yeoman.generators.Base.extend({
         this.templatePath('dev/_README' + bannerSuffix + '.md'),
         this.destinationPath('README.md')
       );
-      if (bannerSuffix === '_sizemek') {
-        // copy the EBLoader only if this is a Sizemek banner
-        this.fs.copy(
-          this.templatePath('dev/_EBLoader_sizemek.js'),
-          this.destinationPath('dev/EBLoader.js')
-        );
-      }
       var scriptOptions = {
         bannerName: this.props.bannerName,
         bannerSize: this.props.bannerSize,

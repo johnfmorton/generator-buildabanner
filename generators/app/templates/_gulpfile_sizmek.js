@@ -1,4 +1,4 @@
-// Standard HTML polite banner
+// Standard HTML polite banner for Sizmek
 // <%= creativeName %>
 
 // Rename the archive that will be created here
@@ -207,10 +207,8 @@ gulp.task('open', function() {
         .pipe(open(options));
 });
 
-// Added EBLoader.js to the copy method
-
 gulp.task('copy-to-dist-folder', function() {
-    return gulp.src(['dev/index.html', 'dev/style.css', 'dev/**/*.mp4', 'dev/**/*.ogv', 'dev/**/*.ogg', 'dev/**/*.webm','dev/**/*.png', 'dev/**/*.jpg', 'dev/**/*.gif', 'dev/**/*.svg', 'dev/script.js', 'dev/EBLoader.js', '!dev/comp*'])
+    return gulp.src(['dev/index.html', 'dev/style.css', 'dev/**/*.mp4', 'dev/**/*.ogv', 'dev/**/*.ogg', 'dev/**/*.webm','dev/**/*.png', 'dev/**/*.jpg', 'dev/**/*.gif', 'dev/**/*.svg', 'dev/script.js', '!dev/comp*'])
         .pipe(gulp.dest('dist'));
 });
 

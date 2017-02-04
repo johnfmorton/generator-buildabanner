@@ -1,6 +1,6 @@
-# Standard Sizemek Build A Banner Instructions
+# Standard Sizmek Build A Banner Instructions
 
-You've installed the standard Sizemek banner version of *Build A Banner*.
+You've installed the standard Sizmek banner version of *Build A Banner*.
 
 ## Getting started
 
@@ -12,7 +12,7 @@ As you make changes to the *index.html*, *script.js* and *style.scss* files, you
 
 ## The backup image
 
-Backup images are typically required for Sizemek standard banners but are not delivered inside the ZIP file that makes up the HTML banner. The exception is if you place a backup image in your noscript tag. This seems like a waste of your limited K weight when it comes to standard banners but some clients request it.
+Backup images are typically required for Sizmek standard banners but are not delivered inside the ZIP file that makes up the HTML banner. The exception is if you place a backup image in your noscript tag. This seems like a waste of your limited K weight when it comes to standard banners but some clients request it.
 
 The *Build A Banner* workflow can assit in preparing a backup image for delivery. Make an **optimized** backup image for your banner and store it in the 'backupImages' directory found along side the 'dev' directory. (*Build A Banner* will not optimize the image for you.) You can have *only one* image in the backup directory. You can have *only one* image in the backup directory.The name of your backup image can be anything you want as long as the extension is correct. For example, you can simply name it 'backup.gif' or 'backup.jpg'. The *Build A Banner* workflow will rename your backup image properly when it builds out your banner for delivery. 
 
