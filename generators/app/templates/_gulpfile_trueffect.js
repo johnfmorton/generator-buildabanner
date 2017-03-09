@@ -204,9 +204,9 @@ gulp.task('connect', function() {
 
 gulp.task('open', function() {
     var options = {
-        uri: 'http://localhost:8889',
-        app: 'Google Chrome'
-            //app: 'firefox'
+        uri: 'http://localhost:8889'
+        // app: 'Google Chrome' on Max OSX or 'chrome' on Windows
+        // app: 'firefox'
     };
     gutil.log('-----------------------------------------');
     gutil.log('Opening browser to:', gutil.colors.yellow('http://localhost:8889'));
