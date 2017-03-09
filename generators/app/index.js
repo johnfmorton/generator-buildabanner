@@ -39,7 +39,7 @@ module.exports = yeoman.generators.Base.extend({
       type: 'list',
       name: 'bannerSize',
       message: 'Choose a size for this banner.',
-      choices: ['300x250', '728x90', '970x90', '160x600', '300x600', '320x50'],
+      choices: ['300x250', '728x90', '970x90', '970x250', '160x600', '300x600', '320x50'],
       default: '300x250'
     }, {
       type: 'confirm',
@@ -94,6 +94,12 @@ module.exports = yeoman.generators.Base.extend({
           props.bannerHeight = 88;
           props.actualBannerWidth = 970;
           props.actualBannerHeight = 90;
+          break;
+        case '970x250':
+          props.bannerWidth = 968;
+          props.bannerHeight = 248;
+          props.actualBannerWidth = 970;
+          props.actualBannerHeight = 250;
           break;
         case '160x600':
           props.bannerWidth = 158;
