@@ -220,7 +220,8 @@ module.exports = class extends Generator {
             archiveName: this.props.archiveName,
             // this "openTag" variable is used to get a
             // reserved character set, <%=, into the gulpfile template
-            openTag: '<%='
+            openTag: '<%=',
+            closeTag: '%>'
         }
         this.fs.copyTpl(
             this.templatePath('_gulpfile' + bannerSuffix + '.js'),
@@ -323,7 +324,7 @@ module.exports = class extends Generator {
             });
         };
         // attempt to run NPM install automatically
-        this.npmInstall();
+        // this.npmInstall();
     }
 
     end() {

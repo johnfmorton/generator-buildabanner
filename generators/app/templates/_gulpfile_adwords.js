@@ -34,15 +34,15 @@ const pkg = require('./package.json');
 const nowDate = new Date();
 
 const bannerMessageHtml = ['<!--',
-    ' <%= openTag %> pkg.name %> - <%= openTag %> pkg.description %>',
-    ' @version v<%= openTag %> pkg.version %>',
+    ' <%- openTag %> pkg.name <%- closeTag %> - <%- openTag %> pkg.description <%- closeTag %>',
+    ' @version v<%- openTag %> pkg.version <%- closeTag %>',
     ' @date ' + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() + "-" + nowDate.getFullYear() + " at " + nowDate.getHours() + ":" + nowDate.getMinutes() + ":" + nowDate.getSeconds(),
     ' -->',
     ''
 ].join('\n');
 const bannerMessageJsCss = ['/**',
-    ' * <%= openTag %> pkg.name %> - <%= openTag %> pkg.description %>',
-    ' * @version v<%= openTag %> pkg.version %>',
+    ' * <%- openTag %> pkg.name <%- closeTag %> - <%- openTag %> pkg.description <%- closeTag %>',
+    ' * @version v<%- openTag %> pkg.version <%- closeTag %>',
     ' * @date ' + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() + "-" + nowDate.getFullYear() + " at " + nowDate.getHours() + ":" + nowDate.getMinutes() + ":" + nowDate.getSeconds(),
     ' */',
     ''
