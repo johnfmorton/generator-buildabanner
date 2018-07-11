@@ -1,7 +1,7 @@
 {
   "name": "generator-buildabanner",
-  "version": "0.11.0",
-  "description": "Yeoman generator to start an HTML banner, standard, Adwords, DoubleClick Studio, or TruEffect using Gulp",
+  "version": "2.0.0",
+  "description": "Yeoman generator to start an HTML banner, standard, Adwords, or DoubleClick Studio using Gulp 4",
   "license": "MIT",
   "main": "app/index.js",
   "repository": {
