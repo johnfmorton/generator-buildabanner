@@ -198,7 +198,7 @@ module.exports = class extends Generator {
                 bannerSuffix = "_standard"
         }
         var bannerType = this.props.bannerType;
-        
+
         // Yo, check your props.
         // this.log(this.props)
 
@@ -233,18 +233,13 @@ module.exports = class extends Generator {
             this.destinationPath('gulpfile.babel.js'),
             gulpfileOptions
         );
-        // // copy only select contents from the 'dev' folder
-        // this.fs.copy(
-        //     this.templatePath('dev/!(_index.html|_*.*|*.src)'),
-        //     this.destinationPath('dev')
-        // );
         // copy only select contents from the 'backupImages' folder
         this.fs.copy(
             // only copy the correct size of backup image to folder
             this.templatePath('backupImage/backup-' + this.props.bannerSize + '.gif'),
             this.destinationPath('backupImage/backup.gif')
         );
-        // // copy the correct README file
+        // copy the correct README file
         this.fs.copy(
             this.templatePath('dev/_README' + bannerSuffix + '.md'),
             this.destinationPath('README.md')
