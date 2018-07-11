@@ -61,7 +61,7 @@ module.exports = class extends Generator {
             type: 'list',
             name: 'bannerType',
             message: 'What type of banner is this?',
-            choices: ['Standard', 'AdWords', 'DoubleClick', 'TruEffect', 'Sizmek'],
+            choices: ['Standard', 'AdWords', 'DoubleClick', 'Sizmek'],
             default: 'Standard'
         }, {
             type: 'list',
@@ -187,9 +187,6 @@ module.exports = class extends Generator {
         switch (this.props.bannerType) {
             case "AdWords":
                 bannerSuffix = "_adwords";
-                break;
-            case "TruEffect":
-                bannerSuffix = "_trueffect";
                 break;
             case "DoubleClick":
                 bannerSuffix = "_dc";
