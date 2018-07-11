@@ -211,6 +211,11 @@ module.exports = class extends Generator {
             this.destinationPath('package.json'),
             packageOptions
         );
+        this.fs.copyTpl(
+            this.templatePath('_babelrc'),
+            this.destinationPath('.babelrc'),
+            packageOptions
+        );
         // process and copy the gulpfile
         var gulpfileOptions = {
             creativeName: this.props.bannerName,
