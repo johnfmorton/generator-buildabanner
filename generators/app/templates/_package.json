@@ -2,6 +2,7 @@
   "name": "<%= bannerName %>",
   "version": "1.0.0",
   "bannerSize": "<%= bannerSize %>",
+  "bannerType": "<%= bannerType %>",
   "description": "<%= bannerDesc %>",
   "main": "index.html",
   "keywords": [

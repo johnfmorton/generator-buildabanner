@@ -96,7 +96,7 @@ module.exports = class extends Generator {
             }
         }];
 
-        this.log('prompting')
+        // this.log('prompting')
 
         // return this.prompt([{
         //     type: 'input',
@@ -182,7 +182,6 @@ module.exports = class extends Generator {
     }
 
     writing() {
-        this.log('writing')
         var bannerSuffix;
         switch (this.props.bannerType) {
             case "AdWords":
@@ -199,9 +198,12 @@ module.exports = class extends Generator {
                 bannerSuffix = "_standard"
         }
         var bannerType = this.props.bannerType;
-        this.log(bannerSuffix)
-        this.log(this.props)
+        
+        // Yo, check your props.
+        // this.log(this.props)
+
         var packageOptions = {
+            bannerType: this.props.bannerType,
             bannerName: this.props.bannerName,
             bannerSize: this.props.bannerSize,
             bannerDesc: this.props.bannerDesc
@@ -218,6 +220,7 @@ module.exports = class extends Generator {
         );
         // process and copy the gulpfile
         var gulpfileOptions = {
+            bannerType: this.props.bannerType,
             creativeName: this.props.bannerName,
             archiveName: this.props.archiveName,
             // this "openTag" variable is used to get a
@@ -247,6 +250,7 @@ module.exports = class extends Generator {
             this.destinationPath('README.md')
         );
         var scriptOptions = {
+            bannerType: this.props.bannerType,
             bannerName: this.props.bannerName,
             bannerSize: this.props.bannerSize,
             bannerDesc: this.props.bannerDesc
@@ -258,6 +262,7 @@ module.exports = class extends Generator {
         );
         // process and copy the dev/index.html
         var indexOptions = {
+            bannerType: this.props.bannerType,
             bannerName: this.props.bannerName,
             actualBannerWidth: this.props.actualBannerWidth,
             actualBannerHeight: this.props.actualBannerHeight
@@ -269,6 +274,7 @@ module.exports = class extends Generator {
         );
         // process and copy the dev/style.scss
         var styleOptions = {
+            bannerType: this.props.bannerType,
             bannerWidth: this.props.bannerWidth,
             bannerHeight: this.props.bannerHeight
         }

@@ -1,3 +1,5 @@
+// <%= bannerType %> banner
+
 // Rename the archive that will be created here
 const archiveName = '<%= archiveName %>';
 
@@ -50,6 +52,7 @@ const nowDate = new Date();
 
 const bannerMessageHtml = ['<!--',
   ' <%- openTag %> pkg.name <%- closeTag %> - <%- openTag %> pkg.description <%- closeTag %>',
+  ' * Build A Banner info: https://www.npmjs.com/package/generator-buildabanner',
   ' @version v<%- openTag %> pkg.version <%- closeTag %>',
   ' @date ' + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() + "-" + nowDate.getFullYear() + " at " + nowDate.getHours() + ":" + nowDate.getMinutes() + ":" + nowDate.getSeconds(),
   ' -->',
@@ -59,6 +62,7 @@ const bannerMessageHtml = ['<!--',
 
 const bannerMessageJsCss = ['/**',
   ' * <%- openTag %> pkg.name <%- closeTag %> - <%- openTag %> pkg.description <%- closeTag %>',
+  ' * Build A Banner info: https://www.npmjs.com/package/generator-buildabanner',
   ' * @version v<%- openTag %> pkg.version <%- closeTag %>',
   ' * @date ' + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() + "-" + nowDate.getFullYear() + " at " + nowDate.getHours() + ":" + nowDate.getMinutes() + ":" + nowDate.getSeconds(),
   ' */',
