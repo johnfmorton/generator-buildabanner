@@ -226,8 +226,8 @@ module.exports = class extends Generator {
             closeTag: '%>'
         }
         this.fs.copyTpl(
-            this.templatePath('_gulpfile' + bannerSuffix + '.js'),
-            this.destinationPath('gulpfile.js'),
+            this.templatePath('_gulpfile.babel.js'),
+            this.destinationPath('gulpfile.babel.js'),
             gulpfileOptions
         );
         // // copy only select contents from the 'dev' folder
