@@ -1,9 +1,10 @@
 'use strict';
-var Generator = require('yeoman-generator');
-var chalk = require('chalk');
-var yosay = require('yosay');
-var Download = require('download');
-var camelCase = require('camelcase');
+const Generator = require('yeoman-generator');
+const chalk = require('chalk');
+const yosay = require('yosay');
+const Download = require('download');
+// const camelCase = require('camelcase');
+const slugify = require('@sindresorhus/slugify');
 
 // let myanswers;
 
@@ -48,7 +49,7 @@ module.exports = class extends Generator {
             type: 'input',
             name: 'bannerName',
             filter: function(answer) {
-                return camelCase(answer)
+                return slugify(answer)
             },
             message: 'Banner name (no spaces):',
             default: this.appname
@@ -61,8 +62,8 @@ module.exports = class extends Generator {
             type: 'list',
             name: 'bannerType',
             message: 'What type of banner is this?',
-            choices: ['Standard', 'AdWords', 'DoubleClick', 'Sizmek'],
-            default: 'Standard'
+            choices: ['Standard/AdWords', 'DoubleClick', 'Sizmek'],
+            default: 'Standard/AdWords'
         }, {
             type: 'list',
             name: 'bannerSize',
@@ -184,16 +185,13 @@ module.exports = class extends Generator {
     writing() {
         var bannerSuffix;
         switch (this.props.bannerType) {
-            case "AdWords":
-                bannerSuffix = "_adwords";
-                break;
             case "DoubleClick":
                 bannerSuffix = "_dc";
                 break;
             case "Sizmek":
                 bannerSuffix = "_sizmek";
                 break;
-            case "Standard":
+            case "Standard/AdWords":
             default:
                 bannerSuffix = "_standard"
         }
@@ -314,10 +312,10 @@ module.exports = class extends Generator {
         );
     }
 
-    configuring() {
-        this.log('configuring', this.props.name)
-        this.log(this.props)
-    }
+    // configuring() {
+    //     this.log('configuring', this.props.name)
+    //     this.log(this.props)
+    // }
 
     install() {
         this.log('install')
@@ -327,11 +325,17 @@ module.exports = class extends Generator {
             });
         };
         // attempt to run NPM install automatically
-        // this.npmInstall();
+        this.npmInstall();
     }
 
     end() {
-        this.log('end')
+        // this.log('end')
+        this.log('\n');
+        this.log(chalk.bold.yellow('------------------------------------'));
+        this.log(chalk.bold.yellow('|  Start by entering \'') + chalk.bold.blue('gulp') + chalk.bold.yellow('\' below  |'));
+        this.log(chalk.bold.yellow('------------------------------------'));
+        this.log(' ');
+        this.log(chalk.bold.red('For help: gulp man'));
     }
 
 }

@@ -1,7 +1,7 @@
 {
   "name": "generator-buildabanner",
   "version": "2.0.0",
-  "description": "Yeoman generator to start an HTML banner, standard, Adwords, or DoubleClick Studio using Gulp 4",
+  "description": "Yeoman generator to help build a variety of HTML banners: Standard, Adwords, DoubleClick Studio or Sizmek.",
   "license": "MIT",
   "main": "app/index.js",
   "repository": {
@@ -27,7 +27,8 @@
     "doubleclick",
     "sizmek",
     "advertising",
-    "gasp",
+    "gsap",
+    "createjs",
     "gulp",
     "banner"
   ],
@@ -35,10 +36,9 @@
     "yeoman-generator": "^3.0.0"
   },
   "devDependencies": {
-    "camelcase": "^5.0.0",
+    "@sindresorhus/slugify": "^0.3.0",
     "chalk": "^2.4.1",
     "download": "^7.0.0",
-    "gulp": "^3.9.1",
     "yosay": "^2.0.2"
   }
 }

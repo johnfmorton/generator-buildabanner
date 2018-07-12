@@ -278,6 +278,9 @@ archive.description = 'Create an archive of the banner project.'
 END ARCHIVE process
 */
 
+export const ba = gulp.series(build, archive);
+ba.description = "Shortcut to build and then archive a banner."
+
 
 // This serve task is not directly exported
 function serve() {
