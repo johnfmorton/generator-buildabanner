@@ -56,6 +56,8 @@ Both of these prompts for offline use default to "yes". The downloaded code is *
 
 Below are some goal posts for the future of this workflow.
 
+1. I plan on adding an option to inline the CSS and JS into the main `index.html` file.
+
 
 ### Tips
 
