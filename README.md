@@ -1,6 +1,12 @@
 # generator-buildabanner 
 
-This is a [Yeoman](http://yeoman.io) generator to get a starter standard, AdWords, TruEffect, Sizmek or DoubleClick banner scaffolded out quickly.
+This is a [Yeoman](http://yeoman.io) generator to get a starter standard, AdWords, Sizmek or DoubleClick banner scaffolded out quickly.
+
+## Version 2
+
+After 37 releases, Build A Banner has jumped to the 2.0 version. There was never a version 1 in all the previous 37 releases. It had always been version 0 although at some point it should have graduated to version 1. It just didn't happen.
+
+In the Version 2, the Yeoman generator has been rewritten. It has moved to Gulp 4. How you use BAB should remain basically the same though. There have been a lot of updating of the tools behind the scenes to keep current.
 
 ## Let me show you how this works.
 
@@ -10,7 +16,7 @@ Click the image for a video walk through.
 
 ## Notes
 
-This is an evolving work in progress. I refine it as I discover better processes. It is an opinionated workflow to speed the production of building a banner. It includes options for HTML banners for standard, AdWords, TruEffect or DoubleClick HTML banners.
+This is an evolving work in progress. I refine it as I discover better processes. It is an opinionated workflow to speed the production of building a banner. It includes options for HTML banners for standard, AdWords, or DoubleClick HTML banners.
 
 ## Basic usage
 
@@ -36,7 +42,7 @@ To get started use `yo buildabanner` and answer the prompts.
 
 `gulp ba` : This is a shortcut for running `check`, `build`, `archive` in sequence.
 
-`gulp help` : Will provide info on the available comands.
+`gulp man` : Will provide info on the available comands.
 
 ### About offline usage
 
@@ -50,8 +56,6 @@ Both of these prompts for offline use default to "yes". The downloaded code is *
 
 Below are some goal posts for the future of this workflow.
 
-1. I may add an option to automatically include the downloaded Greensock files into the HTML by doing something like `gulp --offline`. I'm still deciding the approach I want to take for this though. So far, the CDN has worked best for me.
-2. Additional media vendor templates may be added in the future but the workflow now includes all the basis ones we generally use. Suggestions welcomed though. 
 
 ### Tips
 
