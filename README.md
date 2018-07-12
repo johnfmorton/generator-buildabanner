@@ -63,6 +63,15 @@ Below are some goal posts for the future of this workflow.
 
 Be sure to check out the `gulp check` command. If you make resizes by duplicating a banner’s folder the metadata ad.size value is easy to overlook and this will help you catch that error. That's what prompted the creation of that command.
 
+
+### But it doesn't work
+
+Be sure you have the latest Gulp command line interface installed. See the [gulp-cli homepage](https://github.com/gulpjs/gulp-cli). 
+
+`npm install gulp-cli -g`
+
+You may also need to update your Yeoman installation as well.
+
 ## License
 
 MIT

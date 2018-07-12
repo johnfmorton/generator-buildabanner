@@ -78,7 +78,7 @@
         https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TimelineMax.min.js
         https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/easing/EasePack.min.js
 
-        Google now hosts a copy of TweenMax. We use it only on Google served ads though. It's an older version than available on Cloudflare
+        Google hosts a copy of TweenMax. We use it only on Google served ads though. It's an older version than available on Cloudflare
         https://s0.2mdn.net/ads/studio/cached_libs/tweenmax_1.20.4_3dc5474a75410cb768741e402b80d908_min.js
 
         What are the other Google hosted libraries? See here:
@@ -90,6 +90,9 @@
         or from the CreateJs.com at
         https://code.createjs.com/1.0.0/preloadjs.min.js
 
+        If you're working on a HTML canvas ad, you will probably want the Easel JS library too.
+        https://code.createjs.com/1.0.0/easeljs.min.js
+
         You may also want to check out the full library of options from CreateJs.com
         https://createjs.com/downloads
 
@@ -97,7 +100,8 @@
 
         //now you can just feed stuff into that one function and give it a callback...
         _politeLoad([
-            //'https://code.createjs.com/1.0.0/preloadjs.min.js',
+            // 'https://code.createjs.com/1.0.0/preloadjs.min.js',
+            // 'https://code.createjs.com/1.0.0/easeljs.min.js',
             'https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js',
             'script.js'
         ], function() {
