@@ -6,6 +6,10 @@
     <title><%= bannerName %></title>
     <meta name="ad.size" content="width=<%= actualBannerWidth %>,height=<%= actualBannerHeight %>">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- Update this click through URL & also update the click through in the noscript tag at the end of this page for the backup image -->
+    <script type="text/javascript">
+      var clickTag = "http://example.com";
+    </script>
     <style type="text/css">
     #container_ad {
         z-index: 20;
@@ -17,11 +21,7 @@
      }
     </style>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <!-- Import the AdWords specific Exit API library
-        See: https://support.google.com/adwordspolicy/answer/176108#html5_ads_table
-        Search for "Using an exit URL" on this page.
-    -->
-    <script type="text/javascript" src="https://tpc.googlesyndication.com/pagead/gadgets/html5/api/exitapi.js"></script>
+
     <script language="javascript">
 
     function _politeLoad(urls, onComplete) {
@@ -63,28 +63,43 @@
 
     function pageLoadedHandler() {
         // Now that the ad is actual in a visible area, let's start this party.
-
+        
         /*
 
         You can import files anyway you want, like from the Greensock CDN
-		https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenLite.min.js
-		https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TimelineLite.min.js
-		https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/easing/EasePack.min.js
-		https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/plugins/CSSPlugin.min.js
+        See https://greensock.com/2-0-0 for all the options
+        
+        TweenMax has everything:
+        https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js
+        
+        Or pick and choose what you need:
+        https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenLite.min.js
+        https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TimelineLite.min.js
+        https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/plugins/CSSPlugin.min.js
+        https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TimelineMax.min.js
+        https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/easing/EasePack.min.js
 
-        Google hosts a copy of TweenMax, so we now use that instead.
-        https://s0.2mdn.net/ads/studio/cached_libs/tweenmax_1.20.0_d360d9a082ccc13b1a1a9b153f86b378_min.js
+        Google now hosts a copy of TweenMax. We use it only on Google served ads though. It's an older version than available on Cloudflare
+        https://s0.2mdn.net/ads/studio/cached_libs/tweenmax_1.20.4_3dc5474a75410cb768741e402b80d908_min.js
 
         What are the other Google hosted libraries? See here:
         https://support.google.com/richmedia/answer/6307288?hl=en
 
         PreloadJS from the CreateJS is a common one we use:
-        https://s0.2mdn.net/ads/studio/cached_libs/preloadjs_0.6.2_d7b96570d4552592ae479162e546cb25_min.js
+        https://s0.2mdn.net/ads/studio/cached_libs/preloadjs_1.0.0_55e44727ad1a72cb590cb504b5394b25_min.js
+
+        or from the CreateJs.com at
+        https://code.createjs.com/1.0.0/preloadjs.min.js
+
+        You may also want to check out the full library of options from CreateJs.com
+        https://createjs.com/downloads
 
         */
 
         //now you can just feed stuff into that one function and give it a callback...
-        _politeLoad(['https://s0.2mdn.net/ads/studio/cached_libs/tweenmax_1.20.0_d360d9a082ccc13b1a1a9b153f86b378_min.js',
+        _politeLoad([
+            //'https://code.createjs.com/1.0.0/preloadjs.min.js',
+            'https://s0.2mdn.net/ads/studio/cached_libs/tweenmax_1.20.4_3dc5474a75410cb768741e402b80d908_min.js',
             'script.js'
         ], function() {
             console.log('ready');
@@ -105,9 +120,9 @@
         <button id="background_exit_ad"></button>
     </div>
     <script type="text/javascript">
-    document.getElementById("background_exit_ad").onclick = function() {
-        ExitApi.exit();
-    }
+        document.getElementById("background_exit_ad").onclick = function() {
+         window.open(window.clickTag);
+         }
     </script>
     <!-- Remove the comment tags around the noscript area below if you would like to include a backup image within your banner build. This isn't typically done, but we've seen it requested by some clients. Doing a back up image this way impacts the K size of your banner build. Instead of doing backups this way, the are typically delivered as a separate standand-alone image. -->
     <!-- You must create a backup image and include it here for users without JS -->
