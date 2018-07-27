@@ -339,7 +339,7 @@ export function man() {
     log('and creates a zip of these files in', c.red('delivery'), 'directory');
     log(c.yellow('gulp archive'), 'takes files from the '+ c.red('dev'), 'directory' + ' plus other important files');
     log('and zips them in the', c.red('archive'), 'directory for archival purposes.');
-    log(c.yellow('gulp ba'), 'is a shortcut to run build and then archive.');
+    log('BONUS:', c.green('gulp ba'), 'is a shortcut to run build and then archive.');
     log('--------------------------');
     resolve();
   });
