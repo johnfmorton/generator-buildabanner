@@ -330,6 +330,7 @@ function turnOnDevMode() {
 }
 
 export function man() {
+  return new Promise(function(resolve, reject) {
     log(c.red('buildabanner'), 'help');
     log('--------------------------');
     log('There are 3 basic commands.');
@@ -340,6 +341,8 @@ export function man() {
     log('and zips them in the', c.red('archive'), 'directory for archival purposes.');
     log(c.yellow('gulp ba'), 'is a shortcut to run build and then archive.');
     log('--------------------------');
+    resolve();
+  });
 }
 
 man.description = 'Help on how to use Build A Banner';
