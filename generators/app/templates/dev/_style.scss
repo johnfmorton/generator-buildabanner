@@ -79,6 +79,21 @@ body, body * {
     // }
 }
 
+
+
+// Remove this sample rule
+#remove-me {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: bold;
+  color: white;
+} 
+
+
+
 /* Invisible button for background clickthrough.
   The background url here is a hack to get around a stacking order
   bug in Windows 8 IE10. For deatils see:
