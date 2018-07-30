@@ -2,6 +2,10 @@
 
 ## Changelog
 
+## [2.0.2] - 2018-07-30
+### Fixed
+- Some dependencies were listed in "devDependencies" which meant they did not install from the production version of BAB. They've been moved to the correct spot in the package.json file.
+
 ## [2.0.1] - 2018-07-27
 ### Fixed
 - The 'gulp man' function now returns a promise and will not cause a warning.

@@ -1,6 +1,6 @@
 {
   "name": "generator-buildabanner",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Yeoman generator to help build a variety of HTML banners: Standard, Adwords, DoubleClick Studio or Sizmek.",
   "license": "MIT",
   "main": "app/index.js",
@@ -33,9 +33,7 @@
     "banner"
   ],
   "dependencies": {
-    "yeoman-generator": "^3.0.0"
-  },
-  "devDependencies": {
+    "yeoman-generator": "^3.0.0",
     "@sindresorhus/slugify": "^0.3.0",
     "chalk": "^2.4.1",
     "download": "^7.0.0",
