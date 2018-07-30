@@ -9,7 +9,7 @@ var bgExit;
 var removeMeBABExample;
 
 //Function to run with any animations starting on load, or bringing in images etc
-bannerInit = function(){
+function bannerInit{
     // adds class "loaded" to the body
     // document.getElementsByTagName('body')[0].className+=' loaded';
 
@@ -35,7 +35,7 @@ bannerInit = function(){
     anim();
 }
 
-anim = function(){
+function anim(){
     console.log('Banner animation has begun.');
 
     // Example #1
@@ -52,11 +52,11 @@ anim = function(){
 }
 
 //Add Event Listeners for DoubleClick
-addListeners = function() {
+function addListeners() {
     bgExit.addEventListener('click', bgExitHandler, false);
 }
 
-bgExitHandler = function(e) {
+function bgExitHandler(e) {
     //Call Exits
     Enabler.exit('HTML5_Background_Clickthrough');
 }

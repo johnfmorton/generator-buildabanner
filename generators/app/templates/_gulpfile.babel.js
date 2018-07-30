@@ -52,9 +52,9 @@ const nowDate = new Date();
 
 const bannerMessageHtml = ['<!--',
   ' <%- openTag %> pkg.name <%- closeTag %> - <%- openTag %> pkg.description <%- closeTag %>',
-  ' * Build A Banner info: https://www.npmjs.com/package/generator-buildabanner',
   ' @version v<%- openTag %> pkg.version <%- closeTag %>',
   ' @date ' + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() + "-" + nowDate.getFullYear() + " at " + nowDate.getHours() + ":" + nowDate.getMinutes() + ":" + nowDate.getSeconds(),
+  ' * Build A Banner info: https://www.npmjs.com/package/generator-buildabanner',
   ' -->',
   ' ',
   ''
@@ -62,9 +62,9 @@ const bannerMessageHtml = ['<!--',
 
 const bannerMessageJsCss = ['/**',
   ' * <%- openTag %> pkg.name <%- closeTag %> - <%- openTag %> pkg.description <%- closeTag %>',
-  ' * Build A Banner info: https://www.npmjs.com/package/generator-buildabanner',
   ' * @version v<%- openTag %> pkg.version <%- closeTag %>',
   ' * @date ' + (nowDate.getMonth() + 1) + "-" + nowDate.getDate() + "-" + nowDate.getFullYear() + " at " + nowDate.getHours() + ":" + nowDate.getMinutes() + ":" + nowDate.getSeconds(),
+  ' * Build A Banner info: https://www.npmjs.com/package/generator-buildabanner',
   ' */',
   ' ',
   ''
@@ -94,14 +94,9 @@ function scripts() {
     .pipe(uglify({
       compress: {
         // compress options
-        drop_console: beautify
+        drop_console: true
       },
-      mangle: {
-        // mangle options
-        properties: {
-          // mangle property options
-        }
-      },
+      mangle: false,
       output: {
         beautify: beautify
       }
