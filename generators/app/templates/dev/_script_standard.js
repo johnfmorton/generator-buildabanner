@@ -9,7 +9,7 @@
 var removeMeBABExample;
 
 //Function to run with any animations starting on load, or bringing in images etc
-bannerInit = function(){
+function bannerInit(){
     // adds class "loaded" to the body
     // document.getElementsByTagName('body')[0].className+=' loaded';
 
@@ -27,7 +27,7 @@ bannerInit = function(){
     anim();
 }
 
-anim = function(){
+function anim(){
     console.log('animating');
 
     // Example #1

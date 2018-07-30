@@ -2,6 +2,11 @@
 
 ## Changelog
 
+## [2.0.3] - 2018-07-30
+### Fixed
+- The JS minification settings were too aggressive and would break some banners. It's been ratched down to not manage variable names.
+- The default "script.js" file has also changed the function style from named functions to function declarations.
+
 ## [2.0.2] - 2018-07-30
 ### Fixed
 - Some dependencies were listed in "devDependencies" which meant they did not install from the production version of BAB. They've been moved to the correct spot in the package.json file.
