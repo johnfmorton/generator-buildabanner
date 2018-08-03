@@ -83,7 +83,16 @@ function styles() {
       pkg: pkg
     }))
     .pipe(gulp.dest(cssDestination))
-    .pipe(connect.reload());
+    // The following line would "inject" changed CSS
+    // back into your HTML. 
+    //
+    // .pipe(connect.reload());
+    //
+    // For banner dev, we usually want to 
+    // force a full browser reload though
+    // so we're purposefully not giving the 
+    // changed CSS file to the reload command
+    .pipe( gulp.src(__filename).pipe(connect.reload()) );
 };
 
 function scripts() {
