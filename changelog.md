@@ -2,6 +2,11 @@
 
 ## Changelog
 
+## [2.0.4] - 2018-08-03
+### Changed
+- Changes in SCSS files during development will now force a browser reload instead of injecting CSS changes into the banner.
+
+
 ## [2.0.3] - 2018-07-30
 ### Fixed
 - The JS minification settings were too aggressive and would break some banners. It's been ratched down to not manage variable names.
