@@ -2,10 +2,13 @@
 
 ## Changelog
 
+## [2.0.5] - 2018-08-14
+### Changed
+- Added "use strict" to default JS file for banners since minification adds it anyway. Helps prevent errors in production build of JS.
+
 ## [2.0.4] - 2018-08-03
 ### Changed
 - Changes in SCSS files during development will now force a browser reload instead of injecting CSS changes into the banner.
-
 
 ## [2.0.3] - 2018-07-30
 ### Fixed

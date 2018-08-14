@@ -1,3 +1,4 @@
+"use strict";
 // JavaScript Document
 // HTML5 Ad Template JS from DoubleClick by Google
 
