@@ -17,6 +17,19 @@
      }
     </style>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <!--removeIf(production)-->
+    <style>
+        /* This CSS will be removed when packaging 
+        the banner for delivery. In development, 
+        it will center the banner in the browser window. 
+        */
+        #container_ad {
+          top: 50vh;
+          left: 50vw;
+          transform: translate(-50%, -50%);
+        }
+    </style>
+    <!--endRemoveIf(production)-->
     <script type="text/javascript" src="https://secure-ds.serving-sys.com/BurstingScript/adKit/adkit.js"></script>
     <!-- There is no click thru URL in this file. It will handled in the Sizmek environment via the adkit.js file above and the EB.clickthrough() at the bottom of this HTML docuement -->
     

@@ -30,6 +30,19 @@
      }
     </style>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <!--removeIf(production)-->
+    <style>
+        /* This CSS will be removed when packaging 
+        the banner for delivery. In development, 
+        it will center the banner in the browser window. 
+        */
+        #container_ad {
+          top: 50vh;
+          left: 50vw;
+          transform: translate(-50%, -50%);
+        }
+    </style>
+    <!--endRemoveIf(production)-->
     <script language="javascript">
     // Initialize Enabler - DoubleClick referrs to this as the most
     // important piece of code in your banner. If it's not here

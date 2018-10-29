@@ -16,6 +16,7 @@ import htmlparser from 'htmlparser2';
 import htmlmin from 'gulp-htmlmin';
 import replace from 'gulp-replace';
 import rename from 'gulp-rename';
+import removeCode from 'gulp-remove-code';
 
 import log from 'fancy-log';
 import c from 'ansi-colors';
@@ -199,6 +200,7 @@ function minifyHmtl() {
   };
   var consoleRegEx = /console\.(clear|count|debug|dir|dirxml|error|group|groupCollapsed|groupEnd|info|profile|profileEnd|time|timeEnd|timeStamp|trace|log|warn) *\(.*\);?/gi;
   return gulp.src('dev/*.html')
+    .pipe(removeCode({ production: true }))
     .pipe(replace(consoleRegEx, ''))
     .pipe(htmlmin(opts))
     .pipe(header(bannerMessageHtml, {
