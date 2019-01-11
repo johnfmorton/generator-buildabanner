@@ -2,6 +2,12 @@
 
 ## Changelog
 
+## [2.0.7] - 2019-01-11
+### Fixed
+- Sizmek banner build always reported banner size meta data as 300x250 and that has been corrected.
+### Changed
+- Sizmek platform updated required some changes to the clickthru code. It's now wrapped in a listener. Notes on Sizmek changes, including notes on the possible need for a config.js file were added to the Sizmek readme file.
+
 ## [2.0.5] - 2018-08-14
 ### Changed
 - Added "use strict" to default JS file for banners since minification adds it anyway. Helps prevent errors in production build of JS.
