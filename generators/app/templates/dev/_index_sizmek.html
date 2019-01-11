@@ -4,7 +4,7 @@
 
 <head>
     <title><%= bannerName %></title>
-    <meta name="ad.size" content="width=300,height=250">
+    <meta name="ad.size" content="width=<%= actualBannerWidth %>,height=<%= actualBannerHeight %>">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <style type="text/css">
     #container_ad {
@@ -31,7 +31,7 @@
     </style>
     <!--endRemoveIf(production)-->
     <script type="text/javascript" src="https://secure-ds.serving-sys.com/BurstingScript/adKit/adkit.js"></script>
-    <!-- There is no click thru URL in this file. It will handled in the Sizmek environment via the adkit.js file above and the EB.clickthrough() at the bottom of this HTML docuement -->
+    <!-- There is no click thru URL in this file. It will handled in the Sizmek environment via the adkit.js file above and the adkit.clickthrough() at the bottom of this HTML docuement -->
     
     <script language="javascript">
 
@@ -164,17 +164,14 @@
         <button id="background_exit_ad"></button>
     </div>
     <script type="text/javascript">
-        document.getElementById("background_exit_ad").addEventListener("click", clickthrough);
+        adkit.onReady(function () {
+            document.getElementById("background_exit_ad").addEventListener("click", clickthrough);
 
-        function clickthrough() {
-            EB.clickthrough();
-        }
+            function clickthrough() {
+                adkit.clickthrough();
+            }
+        });
     </script>
-    <!-- Remove the comment tags around the noscript area below if you would like to include a backup image within your banner build. This isn't typically done, but we've seen it requested by some clients. Doing a back up image this way impacts the K size of your banner build. Instead of doing backups this way, the are typically delivered as a separate standand-alone image. -->
-    <!-- You must create a backup image and include it here for users without JS -->
-    <!-- <noscript>
-        <a href="http://example.com"><img src="backupimage.jpg" width="300" height="250"></a>
-    </noscript> -->
 </body>
 
 </html>
