@@ -21,10 +21,7 @@ body, body * {
 
 /* Div layer for the entire banner. */
 #container_ad {
-    -ms-transform-origin:0% 0%; /* IE 9 */
-    -webkit-transform-origin:0% 0%; /* Safari and Chrome */
-    -moz-transform-origin:0% 0%; /* Firefox */
-    -o-transform-origin:0% 0%; /* Opera */
+  transform-origin: 0% 0%;;
 
 	position: absolute;
     // width and height are 2px less than the expected 
