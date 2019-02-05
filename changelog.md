@@ -2,6 +2,11 @@
 
 ## Changelog
 
+## [2.0.8] - 2019-02-05
+### Changed
+- The "transform-origin" suggested style has browser prefixes removed
+- The gitignore file now ignores the `.temp` directory used by BAB to serve WIP builds
+
 ## [2.0.7] - 2019-01-11
 ### Fixed
 - Sizmek banner build always reported banner size meta data as 300x250 and that has been corrected.

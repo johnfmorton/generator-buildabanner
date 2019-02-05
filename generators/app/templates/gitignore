@@ -14,3 +14,6 @@ Thumbs.db
 # Node generated files
 node_modules
 npm-debug.log
+
+# ignore the BAB temp directory
+.temp/
