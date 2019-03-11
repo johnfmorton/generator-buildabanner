@@ -215,7 +215,7 @@ BUILD process
 
 // This function takes processed index.html, style.css, and script.js from the .temp folder plus select assets files from the 'dev' folder and moves them all into the dist folder. It will specifically NOT copy "comp" files. To be considered a "comp" file, the filename must begin with "comp", like "comp-1.jpg", "comp2.png", etc.
 function copydist() {
-    return gulp.src(['.temp/index.html', '.temp/style.css', '.temp/script.js', 'dev/**/*.mp4', 'dev/**/*.ogv', 'dev/**/*.ogg', 'dev/**/*.webm','dev/**/*.png', 'dev/**/*.jpg', 'dev/**/*.gif', 'dev/**/*.svg', '!dev/comp*'], {allowEmpty: true})
+    return gulp.src(['.temp/index.html', '.temp/style.css', '.temp/script.js', 'dev/**/*.mp4', 'dev/**/*.ogv', 'dev/**/*.ogg', 'dev/**/*.webm','dev/**/*.png', 'dev/**/*.jpg', 'dev/**/*.gif', 'dev/**/*.svg', 'dev/config.js', '!dev/comp*'], {allowEmpty: true})
         .pipe(gulp.dest('dist'));
 };
 
