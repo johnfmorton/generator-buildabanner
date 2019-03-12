@@ -2,6 +2,10 @@
 
 ## Changelog
 
+## [2.0.9] - 2019-03-11
+### Added
+- A basic "config.js" file is now created when initializing a Sizmek banner. The config file, when present, will also be packaged with the banner when doing a build.
+
 ## [2.0.8] - 2019-02-05
 ### Changed
 - The "transform-origin" suggested style has browser prefixes removed

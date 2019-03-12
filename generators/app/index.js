@@ -184,7 +184,8 @@ module.exports = class extends Generator {
 
     writing() {
         var bannerSuffix;
-        switch (this.props.bannerType) {
+        var bannerType = this.props.bannerType;
+        switch (bannerType) {
             case "DoubleClick":
                 bannerSuffix = "_dc";
                 break;
@@ -195,8 +196,7 @@ module.exports = class extends Generator {
             default:
                 bannerSuffix = "_standard"
         }
-        var bannerType = this.props.bannerType;
-
+        
         // Yo, check your props.
         // this.log(this.props)
 
@@ -242,6 +242,14 @@ module.exports = class extends Generator {
             this.templatePath('dev/_README' + bannerSuffix + '.md'),
             this.destinationPath('README.md')
         );
+
+        if (bannerType === 'Sizmek') {
+            // copy the Sizmek-specific config.js file
+            this.fs.copy(
+                this.templatePath('dev/_config_sizmek.js'),
+                this.destinationPath('dev/config.js')
+            );
+        }
         var scriptOptions = {
             bannerType: this.props.bannerType,
             bannerName: this.props.bannerName,
