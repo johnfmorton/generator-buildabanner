@@ -2,6 +2,10 @@
 
 ## Changelog
 
+## [2.0.10] - 2019-03-12
+### Fixed
+- A failed git merge resulted in 2.0.9 being identical to 2.0.8. Version 2.0.10 is a fix to get the changes to actully be in the code release.
+
 ## [2.0.9] - 2019-03-11
 ### Added
 - A basic "config.js" file is now created when initializing a Sizmek banner. The config file, when present, will also be packaged with the banner when doing a build.
