@@ -62,8 +62,8 @@ module.exports = class extends Generator {
             type: 'list',
             name: 'bannerType',
             message: 'What type of banner is this?',
-            choices: ['Standard/AdWords', 'DoubleClick', 'Sizmek'],
-            default: 'Standard/AdWords'
+            choices: ['Google Ad (DCM/Ad Words)', 'DoubleClick', 'Standard Non-Google Ad', 'Sizmek'],
+            default: 'Google Ad (DCM/Ad Words)'
         }, {
             type: 'list',
             name: 'bannerSize',
@@ -192,7 +192,10 @@ module.exports = class extends Generator {
             case "Sizmek":
                 bannerSuffix = "_sizmek";
                 break;
-            case "Standard/AdWords":
+            case "Standard Non-Google Ad":
+                bannerSuffix = "_nongoogle";
+                break;
+            case "Google Ad (DCM/Ad Words)":
             default:
                 bannerSuffix = "_standard"
         }
@@ -216,11 +219,23 @@ module.exports = class extends Generator {
             this.destinationPath('.babelrc'),
             packageOptions
         );
+
+        // a non-google ad needs to add
+        // URL parameters to the dev server
+        // so set up URL parameters for that case
+
+        var urlParameters = '';
+
+        if (this.props.bannerType === "Standard Non-Google Ad") {
+            urlParameters = '?clickTAG=http://example.com';
+        }
+
         // process and copy the gulpfile
         var gulpfileOptions = {
             bannerType: this.props.bannerType,
             creativeName: this.props.bannerName,
             archiveName: this.props.archiveName,
+            urlParameters: urlParameters,
             // this "openTag" variable is used to get a
             // reserved character set, <%=, into the gulpfile template
             openTag: '<%=',

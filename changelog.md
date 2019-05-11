@@ -2,6 +2,16 @@
 
 ## Changelog
 
+## [2.0.11] - 2019-05-11
+### Added
+- A new banner type has been added "Standard Non-Google Ad".
+
+### Changed
+- The "Standard/AdWords" has been renamed "Google Ad (DCM/Ad Words)"
+
+### Fixed
+- Banner archive was not including the invisible files like .babelrc and .gitignore in the archive. This is now fixed.
+
 ## [2.0.10] - 2019-03-12
 ### Fixed
 - A failed git merge resulted in 2.0.9 being identical to 2.0.8. Version 2.0.10 is a fix to get the changes to actully be in the code release.

@@ -215,7 +215,7 @@ BUILD process
 
 // This function takes processed index.html, style.css, and script.js from the .temp folder plus select assets files from the 'dev' folder and moves them all into the dist folder. It will specifically NOT copy "comp" files. To be considered a "comp" file, the filename must begin with "comp", like "comp-1.jpg", "comp2.png", etc.
 function copydist() {
-    return gulp.src(['.temp/index.html', '.temp/style.css', '.temp/script.js', 'dev/**/*.mp4', 'dev/**/*.ogv', 'dev/**/*.ogg', 'dev/**/*.webm','dev/**/*.png', 'dev/**/*.jpg', 'dev/**/*.gif', 'dev/**/*.svg', 'dev/config.js', '!dev/comp*'], {allowEmpty: true})
+    return gulp.src(['.temp/index.html', '.temp/style.css', '.temp/script.js', 'dev/**/*.mp4', 'dev/**/*.ogv', 'dev/**/*.ogg', 'dev/**/*.webm','dev/**/*.png', 'dev/**/*.jpg', 'dev/**/*.gif', 'dev/**/*.svg', 'dev/config.js', 'dev/.*', '!dev/comp*'], {allowEmpty: true})
         .pipe(gulp.dest('dist'));
 };
 
@@ -267,7 +267,8 @@ Begin ARCHIVE process
 
 export function archive() {
     // make a zip all the files, including dev folder, for archiving the banner
-   var success = gulp.src(['gulpfile*.js', 'package.json', '*.sublime-project', 'dev/**/*', 'dist/**/*', 'backupImage/*', 'delivery/**/*'], {cwdbase: true, allowEmpty: true})
+    // include the invisible files, except for the .temp directory
+   var success = gulp.src(['gulpfile*.js', 'package.json', '*.sublime-project', 'dev/**/*', 'dist/**/*', 'backupImage/*', 'delivery/**/*', '.*', '!.temp'], {cwdbase: true, allowEmpty: true})
         // for quick access, you can change this name at the top of this file
         .pipe(zip('archive-'+archiveName+'.zip'))
         .pipe(gulp.dest('archive'));
@@ -305,7 +306,7 @@ function openBrowser() {
   return new Promise(function(resolve, reject) {
     gulp.src(__filename)
       .pipe(open({
-        uri: `http://localhost:${serverInfo.port}`
+        uri: `http://localhost:${serverInfo.port}<%= urlParameters %>`
       }));
     resolve();
   });

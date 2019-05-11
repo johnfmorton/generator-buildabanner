@@ -1,10 +1,10 @@
-# Google Ad Build A Banner Instructions
+# Non-Google Build A Banner Instructions
 
-You've installed the Google Ad banner version of *Build A Banner*.
+You've installed the Non-Google banner version of *Build A Banner*.
 
-This is a standard banner for use in Ad Word and DCM. If you use *Google Web Designer*, the term used there is "Google Ad" as the ad type. For clarity, BAB uses the same terminology. Media companies may also use this terminology. 
+This is a generic standard banner, but if you use *Google Web Designer*, the term used there is "Non-Google" as the ad type. For clarity, BAB uses the same terminology. Media companies may also use this terminology. 
 
-The *ONLY* difference between this and the "Non-Google Ad" ad type is the click through functionality. You can swap the click thru script and remove the "clickTag" variable definition near the top of your index.html file if you need to make a Non-Google version of this banner. Run BAB again and make a "Non-Google Ad" in a new directory then check the index.html file for a reference.
+The *ONLY* difference between this and the "Google Ad" ad type is the click through functionality. You can swap the click thru script and define a "clickTag" variable near the top of your index.html file if you need to make a DCM version of this banner. Run BAB again and make a "Google Ad" in a new directory then check the index.html file for a reference.
 
 ## Getting started
 
@@ -13,6 +13,10 @@ Begin development by typing "**gulp**" into your command line. This should spin 
 If you use Sublime Text, open the mybanner.sublime-project file and you can quickly begin editing your banner in the "Banner dev" folder in the left hand column of Sublime Text project. 
 
 As you make changes to the *index.html*, *script.js* and *style.scss* files, your browser will update and show you the changes you've made. The SCSS file is converted to CSS on the fly. Do **not** edit the CSS file directly because it will be overwritten.
+
+## About the dev server & clickTAG parameter
+
+During development, the banner will load into a browser at a URL like "http://localhost:8889/?clickTAG=http://example.com". The "clickTAG" parameter is needed to tell the banner where to click through to. If you're dispalying these banners on a development server for approvals you may want to add the "?clickTAG=http://example.com" to the end of your URL so that your client sees the banner does accept the expected parameter that a Non-Google ad uses when it is trafficked. The "clickTAG" parameter is case insensative, so "clicktag" or "clickTag" also work.
 
 ## The backup image
 

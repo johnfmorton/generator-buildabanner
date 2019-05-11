@@ -1,0 +1,187 @@
+<!-- HTML 5 Ad Template from DoubleClick by Google // modified to remove DCS specific code for use as a generic non-Google banner for serving on a platform like The Trading Desk -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title><%= bannerName %></title>
+    <meta name="ad.size" content="width=<%= actualBannerWidth %>,height=<%= actualBannerHeight %>">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style type="text/css">
+    #container_ad {
+        z-index: 20;
+    }
+    button {
+        background: none;
+        outline: 0;
+        border: 0;
+     }
+    </style>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!--removeIf(production)-->
+    <style>
+        /* This CSS will be removed when packaging 
+        the banner for delivery. In development, 
+        it will center the banner in the browser window. 
+        */
+        #container_ad {
+          top: 50vh;
+          left: 50vw;
+          transform: translate(-50%, -50%);
+        }
+    </style>
+    <!--endRemoveIf(production)-->
+
+    <script language="javascript">
+
+    function _politeLoad(urls, onComplete) {
+        var l = urls.length,
+            loaded = 0,
+            checkProgress = function() {
+                if (++loaded === l && onComplete) {
+                    onComplete();
+                }
+            },
+            i;
+        for (i = 0; i < l; i++) {
+            _loadScript(urls[i], checkProgress);
+        }
+    }
+
+    function _loadScript(url, callback){
+
+        var script = document.createElement("script")
+        script.type = "text/javascript";
+
+        if (script.readyState){  //IE
+            script.onreadystatechange = function(){
+                if (script.readyState == "loaded" ||
+                        script.readyState == "complete"){
+                    script.onreadystatechange = null;
+                    callback();
+                }
+            };
+        } else {  //Others
+            script.onload = function(){
+                callback();
+            };
+        }
+
+        script.src = url;
+        document.getElementsByTagName("head")[0].appendChild(script);
+    }
+
+    function pageLoadedHandler() {
+        // Now that the ad is actual in a visible area, let's start this party.
+        
+        /*
+
+        You can import files anyway you want, like from the Greensock CDN
+        See https://greensock.com/2-0-0 for all the options
+        
+        TweenMax has everything:
+        https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js
+        
+        Or pick and choose what you need:
+        https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenLite.min.js
+        https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TimelineLite.min.js
+        https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/plugins/CSSPlugin.min.js
+        https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TimelineMax.min.js
+        https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/easing/EasePack.min.js
+
+        Google hosts a copy of TweenMax. We use it only on Google served ads though. It's an older version than available on Cloudflare
+        https://s0.2mdn.net/ads/studio/cached_libs/tweenmax_1.20.4_3dc5474a75410cb768741e402b80d908_min.js
+
+        What are the other Google hosted libraries? See here:
+        https://support.google.com/richmedia/answer/6307288?hl=en
+
+        PreloadJS from the CreateJS is a common one we use:
+        https://s0.2mdn.net/ads/studio/cached_libs/preloadjs_1.0.0_55e44727ad1a72cb590cb504b5394b25_min.js
+
+        or from the CreateJs.com at
+        https://code.createjs.com/1.0.0/preloadjs.min.js
+
+        If you're working on a HTML canvas ad, you will probably want the Easel JS library too.
+        https://code.createjs.com/1.0.0/easeljs.min.js
+
+        You may also want to check out the full library of options from CreateJs.com
+        https://createjs.com/downloads
+
+        */
+
+        //now you can just feed stuff into that one function and give it a callback...
+        _politeLoad([
+            // 'https://code.createjs.com/1.0.0/preloadjs.min.js',
+            // 'https://code.createjs.com/1.0.0/easeljs.min.js',
+            'https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js',
+            'script.js'
+        ], function() {
+            console.log('bannerInit');
+            bannerInit();
+
+            // if you want to preload images
+            // 1. remove the bannerInit() above
+            // 2. in the _politeLoad list of JS files above, be sure to load the preloadjs library
+            // 3. uncomment out the preloadImage() and related event listener functions below
+            // 4. in the loadManifest list out the images you want to preload before animation begins in your banner
+            //
+            // preloadImages()
+        });
+
+        // function preloadImages() {
+        //     console.log('preloadImages')
+        //     var queue = new createjs.LoadQueue();
+        //     queue.stopOnError = true;
+        //     // list the images you want to preload here
+        //     queue.loadManifest([
+        //         "myimage1.png",
+        //         "myimage2.jpg",
+        //     ]);
+        //     queue.on("complete", handleComplete, this);
+        //     queue.on("error", handleError, this);
+        //     queue.on("fileerror", handleFileError, this);
+        // }
+
+        // function handleComplete(e) {
+        //     console.log('complete', e);
+        //     bannerInit();
+        // }
+
+        // function handleError(e) {
+        //   console.log("error", e)
+        // }
+        // function handleFileError(e) {
+        //   console.log("handleFileError", e)
+        // }
+    }
+    </script>
+</head>
+
+<body onload="pageLoadedHandler();">
+    <div id="container_ad">
+        <div id="content_ad">
+            <!-- Your banner ad content goes here -->
+            <div id="remove-me">Build A Banner</div>
+        </div>
+        <button id="background_exit_ad"></button>
+    </div>
+    <script type="text/javascript">
+        // This click thru code looks for a parameter of "clicktag".
+        // It is case insensative so "clickTag", "clickTAG", "ClickTag", etc all work
+        document.getElementById("background_exit_ad").onclick = function() {
+            function getParameterByName(name) {
+              name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+              var regex = new RegExp("[\\?&]" + name + "=([^&#]*)", 'i'),
+                results = regex.exec(location.search);
+              return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+            window.open(getParameterByName("clickTAG"));
+         }
+    </script>
+    <!-- Remove the comment tags around the noscript area below if you would like to include a backup image within your banner build. This isn't typically done, but we've seen it requested by some clients. Doing a back up image this way impacts the K size of your banner build. Instead of doing backups this way, the are typically delivered as a separate standand-alone image. -->
+    <!-- You must create a backup image and include it here for users without JS -->
+    <!-- <noscript>
+        <a href="http://example.com"><img src="backupimage.jpg" width="<%= actualBannerWidth %>" height="<%= actualBannerHeight %>"></a>
+    </noscript> -->
+</body>
+
+</html>
