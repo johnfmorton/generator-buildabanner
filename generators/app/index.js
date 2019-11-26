@@ -312,12 +312,6 @@ module.exports = class extends Generator {
             (async () => {
             await download('https://s0.2mdn.net/ads/studio/Enabler.js', 'offline');
             })();
-            // download({
-            //         mode: '755'
-            //     })
-            //     .get('https://s0.2mdn.net/ads/studio/Enabler.js')
-            //     .dest('offline')
-            //     .run();
         }
 
         // Editor config file
