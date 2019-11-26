@@ -2,6 +2,16 @@
 
 ## Changelog
 
+## [2.0.12] - 2019-11-26
+### Fixed
+- Fixed error when using the "Doubleclick" build option. Error would occur when choosing to download a local copy of the Enabler.js. It now works as expected.
+- In DoubleClick starter script.js added missing parentheses.
+- Updated yeoman-generator to fix audit warnings
+- Updated gulp.babel.js syntax to CommonJS. Using require instead of import.
+- Updated Babel from 6.26.3 to 7.7.4
+- Updated Gulp Babel from 7.01 to 8.0.0
+- removed unneeded "run-sequence" dependency from the banner build process
+
 ## [2.0.11] - 2019-05-11
 ### Added
 - A new banner type has been added "Standard Non-Google Ad".
