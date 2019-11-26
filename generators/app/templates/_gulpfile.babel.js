@@ -3,31 +3,32 @@
 // Rename the archive that will be created here
 const archiveName = '<%= archiveName %>';
 
-import gulp from 'gulp';
-import sass from 'gulp-sass';
-import babel from 'gulp-babel';
-import del from 'del';
-import header from 'gulp-header';
-import uglify from 'gulp-uglify';
-import connect from 'gulp-connect';
-import open from 'gulp-open';
+const gulp = require('gulp');
+const babel = require('gulp-babel');
+const sass = require('gulp-sass');
+// import babel from 'gulp-babel';
+const del = require( 'del');
+const header = require( 'gulp-header');
+const uglify = require( 'gulp-uglify');
+const connect = require( 'gulp-connect');
+const open = require( 'gulp-open');
 
-import htmlparser from 'htmlparser2';
-import htmlmin from 'gulp-htmlmin';
-import replace from 'gulp-replace';
-import rename from 'gulp-rename';
-import removeCode from 'gulp-remove-code';
+const htmlparser = require( 'htmlparser2');
+const htmlmin = require( 'gulp-htmlmin');
+const replace = require( 'gulp-replace');
+const rename = require( 'gulp-rename');
+const removeCode = require( 'gulp-remove-code');
 
-import log from 'fancy-log';
-import c from 'ansi-colors';
-import fs from 'fs';
-import notify from 'gulp-notify';
+const log = require( 'fancy-log');
+const c = require( 'ansi-colors');
+const fs = require( 'fs');
+const notify = require( 'gulp-notify');
 
-import imageSize from 'image-size';
-import size from 'gulp-size';
-import zip from 'gulp-zip';
+const imageSize = require( 'image-size');
+const size = require( 'gulp-size');
+const zip = require( 'gulp-zip');
 
-import { argv } from 'yargs';
+const argv = require('yargs').argv
 
 
 // read in the package file
@@ -125,7 +126,7 @@ compile.description = 'Compile JS and SCSS'
     Check file size of banner
 */
 
-export function check() {
+function check() {
   return new Promise(function(resolve, reject) {
     log(c.yellow('******************************'));
     log(c.yellow('* Checking for banner errors *'));
@@ -186,6 +187,8 @@ export function check() {
 
 check.description = 'Checks that adsize is defined in index.html and matches size of backup image. Also checks that only 1 backup image is present.';
 
+exports.check = check;
+
 function minifyHmtl() {
   var opts = {
     collapseWhitespace: true, // must be true if conservativeCollapse or preserveLineBreaks are used as true
@@ -240,8 +243,10 @@ function compress() {
         }));
 }
 
-export const clean = () => del(['dist', 'archive', 'delivery', '.temp']);
+const clean = () => del(['dist', 'archive', 'delivery', '.temp']);
 clean.description = 'Removes the automatically created Build A Banner directories: dist, archive, delivery and .temp';
+
+exports.clean = clean;
 
 function copyBackupFile() {
     var sourceFiles = gulp.src(['backupImage/*.png', 'backupImage/*.jpg', 'backupImage/*.gif']);
@@ -253,8 +258,10 @@ function copyBackupFile() {
 };
 
 
-export const build = gulp.series(clean, check, styles, scripts, minifyHmtl, copydist, compress, copyBackupFile);
+const build = gulp.series(clean, check, styles, scripts, minifyHmtl, copydist, compress, copyBackupFile);
 build.description = 'Builds development files into minified files ready for delivery to a media company.';
+
+exports.build = build;
 
 /**
 end of BUILD process
@@ -265,7 +272,7 @@ end of BUILD process
 Begin ARCHIVE process
 */
 
-export function archive() {
+function archive() {
     // make a zip all the files, including dev folder, for archiving the banner
     // include the invisible files, except for the .temp directory
    var success = gulp.src(['gulpfile*.js', 'package.json', '*.sublime-project', 'dev/**/*', 'dist/**/*', 'backupImage/*', 'delivery/**/*', '.*', '!.temp'], {cwdbase: true, allowEmpty: true})
@@ -281,12 +288,16 @@ export function archive() {
 
 archive.description = 'Create an archive of the banner project.'
 
+exports.archive = archive;
+
 /**
 END ARCHIVE process
 */
 
-export const ba = gulp.series(build, archive);
+const ba = gulp.series(build, archive);
 ba.description = "Shortcut to build and then archive a banner."
+
+exports.ba = ba;
 
 
 // This serve task is not directly exported
@@ -336,7 +347,7 @@ function turnOnDevMode() {
   });
 }
 
-export function man() {
+function man() {
   return new Promise(function(resolve, reject) {
     log(c.red('buildabanner'), 'help');
     log('--------------------------');
@@ -354,9 +365,10 @@ export function man() {
 
 man.description = 'Help on how to use Build A Banner';
 
+exports.man = man;
+
 const defaultTasks = gulp.series(clean, turnOnDevMode, compile, gulp.parallel(serve, watch),openBrowser);
 
 defaultTasks.description = 'Clean your development environment and spin up a server for banner development.'
 
-
-export default defaultTasks
+exports.default = defaultTasks;
