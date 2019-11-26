@@ -10,7 +10,7 @@ var bgExit;
 var removeMeBABExample;
 
 //Function to run with any animations starting on load, or bringing in images etc
-function bannerInit{
+function bannerInit(){
     // adds class "loaded" to the body
     // document.getElementsByTagName('body')[0].className+=' loaded';
 
