@@ -2,7 +2,7 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
-const Download = require('download');
+const download = require('download');
 // const camelCase = require('camelcase');
 const slugify = require('@sindresorhus/slugify');
 
@@ -309,13 +309,15 @@ module.exports = class extends Generator {
         }
 
         if (this.props.includeOfflineEnabler == true) {
-
-            new Download({
-                    mode: '755'
-                })
-                .get('https://s0.2mdn.net/ads/studio/Enabler.js')
-                .dest('offline')
-                .run();
+            (async () => {
+            await download('https://s0.2mdn.net/ads/studio/Enabler.js', 'offline');
+            })();
+            // download({
+            //         mode: '755'
+            //     })
+            //     .get('https://s0.2mdn.net/ads/studio/Enabler.js')
+            //     .dest('offline')
+            //     .run();
         }
 
         // Editor config file
