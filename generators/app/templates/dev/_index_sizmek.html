@@ -30,8 +30,31 @@
         }
     </style>
     <!--endRemoveIf(production)-->
-    <script type="text/javascript" src="https://secure-ds.serving-sys.com/BurstingScript/adKit/adkit.js"></script>
-    <!-- There is no click thru URL in this file. It will handled in the Sizmek environment via the adkit.js file above and the adkit.clickthrough() at the bottom of this HTML docuement -->
+    <script src="https://secure-ds.serving-sys.com/BurstingScript/EBLoader.js"></script>
+    <!-- There is no click thru URL in this file. It will handled in the Sizmek environment via the EB.clickthrough() function in the next code block. -->
+    <script>
+        window.addEventListener("load", function() {
+            if (!EB.isInitialized()) {
+                EB.addEventListener(EBG.EventName.EB_INITIALIZED, startAd);
+            } else {
+                startAd();
+            }
+            function startAd() {
+                // now that the EB library is loaded, load the
+                // BAB files, i.e., GSAP + other libs and then our script.js 
+                // file where animation lives
+                pageLoadedHandler();
+                document.body.style.cursor = "pointer";
+                document
+                    .getElementById("background_exit_ad")
+                    .addEventListener("click", clickthrough);
+                function clickthrough() {
+                    console.log("EB clickthrough");
+                    EB.clickthrough();
+                }
+            }
+        });
+    </script>
     
     <script language="javascript">
 
@@ -77,41 +100,30 @@
         
         /*
 
-        You can import files anyway you want, like from the Greensock CDN
-        See https://greensock.com/2-0-0 for all the options
-        
-        TweenMax has everything:
-        https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js
-        
-        Or pick and choose what you need:
-        https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenLite.min.js
-        https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TimelineLite.min.js
-        https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/plugins/CSSPlugin.min.js
-        https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TimelineMax.min.js
-        https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/easing/EasePack.min.js
+        You can import files anyway you want, like from the Greensock CDN:
+        https://cdn.jsdelivr.net/npm/gsap@3.0.1/dist/gsap.min.js
 
-        Google hosts a copy of TweenMax. We use it only on Google served ads though. It's an older version than available on Cloudflare
-        https://s0.2mdn.net/ads/studio/cached_libs/tweenmax_1.20.4_3dc5474a75410cb768741e402b80d908_min.js
+        Here are the docs for installing GSAP. 
+        https://greensock.com/docs/v3/Installation
 
         What are the other Google hosted libraries? See here:
         https://support.google.com/richmedia/answer/6307288?hl=en
 
-        PreloadJS from the CreateJS is a common one we use:
-        https://s0.2mdn.net/ads/studio/cached_libs/preloadjs_1.0.0_55e44727ad1a72cb590cb504b5394b25_min.js
+        Looking for CreateJS libraries? Here are the full set of options:
+        https://code.createjs.com/
 
-        or from the CreateJs.com at
+        PreloadJS from the CreateJS is a common one we use (this is the Adobe CDN version):
         https://code.createjs.com/1.0.0/preloadjs.min.js
 
-        You may also want to check out the full library of options from CreateJs.com
-        https://createjs.com/downloads
-
+        If you're working on a HTML canvas ad, you will probably want the Easel JS library too.
+        https://code.createjs.com/1.0.0/easeljs.min.js
         */
 
         //now you can just feed stuff into that one function and give it a callback...
         _politeLoad([
             // 'https://code.createjs.com/1.0.0/preloadjs.min.js',
-            // 'https://s0.2mdn.net/ads/studio/cached_libs/easeljs_0.8.2_937c3ec68021211c056f61c9ceaccffd_min.js',
-            'https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js',
+            // 'https://code.createjs.com/1.0.0/easeljs.min.js',
+            'https://cdn.jsdelivr.net/npm/gsap@3.0.1/dist/gsap.min.js',
             'script.js'
         ], function() {
             console.log('bannerInit');
@@ -163,15 +175,6 @@
         </div>
         <button id="background_exit_ad"></button>
     </div>
-    <script type="text/javascript">
-        adkit.onReady(function () {
-            document.getElementById("background_exit_ad").addEventListener("click", clickthrough);
-
-            function clickthrough() {
-                adkit.clickthrough();
-            }
-        });
-    </script>
 </body>
 
 </html>

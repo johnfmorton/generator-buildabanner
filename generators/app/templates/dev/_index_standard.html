@@ -76,46 +76,33 @@
     function pageLoadedHandler() {
         // Now that the ad is actual in a visible area, let's start this party.
         
+
         /*
 
-        You can import files anyway you want, like from the Greensock CDN
-        See https://greensock.com/2-0-0 for all the options
-        
-        TweenMax has everything:
-        https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js
-        
-        Or pick and choose what you need:
-        https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenLite.min.js
-        https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TimelineLite.min.js
-        https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/plugins/CSSPlugin.min.js
-        https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TimelineMax.min.js
-        https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/easing/EasePack.min.js
+        You can import files anyway you want, like from the Greensock CDN:
+        https://cdn.jsdelivr.net/npm/gsap@3.0.1/dist/gsap.min.js
 
-        Google hosts a copy of TweenMax. We use it only on Google served ads though. It's an older version than available on Cloudflare
-        https://s0.2mdn.net/ads/studio/cached_libs/tweenmax_1.20.4_3dc5474a75410cb768741e402b80d908_min.js
+        Here are the docs for installing GSAP. 
+        https://greensock.com/docs/v3/Installation
 
         What are the other Google hosted libraries? See here:
         https://support.google.com/richmedia/answer/6307288?hl=en
 
-        PreloadJS from the CreateJS is a common one we use:
-        https://s0.2mdn.net/ads/studio/cached_libs/preloadjs_1.0.0_55e44727ad1a72cb590cb504b5394b25_min.js
+        Looking for CreateJS libraries? Here are the full set of options:
+        https://code.createjs.com/
 
-        or from the CreateJs.com at
+        PreloadJS from the CreateJS is a common one we use (this is the Adobe CDN version):
         https://code.createjs.com/1.0.0/preloadjs.min.js
 
         If you're working on a HTML canvas ad, you will probably want the Easel JS library too.
         https://code.createjs.com/1.0.0/easeljs.min.js
-
-        You may also want to check out the full library of options from CreateJs.com
-        https://createjs.com/downloads
-
         */
 
         //now you can just feed stuff into that one function and give it a callback...
         _politeLoad([
             // 'https://code.createjs.com/1.0.0/preloadjs.min.js',
             // 'https://code.createjs.com/1.0.0/easeljs.min.js',
-            'https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js',
+            'https://cdn.jsdelivr.net/npm/gsap@3.0.1/dist/gsap.min.js',
             'script.js'
         ], function() {
             console.log('bannerInit');
