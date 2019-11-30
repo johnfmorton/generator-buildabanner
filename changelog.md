@@ -11,6 +11,9 @@
 - Updated Babel from 6.26.3 to 7.7.4
 - Updated Gulp Babel from 7.01 to 8.0.0
 - removed unneeded "run-sequence" dependency from the banner build process
+- Updated Sizmek to use EB library instead of adkit.js. This required changes to index.html for clickthrough to fire
+- Updated to Greensock 3.0.1 from Greensock v2.
+- Updated CDN links for all other libraries referenced in code comments.
 
 ## [2.0.11] - 2019-05-11
 ### Added
