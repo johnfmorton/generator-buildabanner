@@ -2,6 +2,12 @@
 
 ## Changelog
 
+## [2.0.14] - 2020-04-08
+
+### Fixed
+
+- Added changelog that was missing in 2.0.13
+
 ## [2.0.13] - 2020-04-08
 
 ### Fixed
