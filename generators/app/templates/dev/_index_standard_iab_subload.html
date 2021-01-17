@@ -21,30 +21,10 @@
             #container_ad{top:50vh;left:50vw;transform:translate(-50%, -50%)}
         </style>
         <!--endRemoveIf(production)-->
-        <script src="https://secure-ds.serving-sys.com/BurstingScript/EBLoader.js"></script>
-        <!-- There is no click thru URL in this file. It will handled in the Sizmek environment via the EB.clickthrough() function in the next code block. -->
-        <script>
-            window.addEventListener("load", function () {
-                if (!EB.isInitialized()) {
-                    EB.addEventListener(EBG.EventName.EB_INITIALIZED, startAd);
-                } else {
-                    startAd();
-                }
-                function startAd() {
-                    // now that the EB library is loaded, load the
-                    // BAB files, i.e., GSAP + other libs and then our script.js
-                    // file where animation lives
-                    pageLoadedHandler();
-                    document.body.style.cursor = "pointer";
-                    document.getElementById("background_exit_ad").addEventListener("click", clickthrough);
-                    function clickthrough() {
-                        console.log("EB clickthrough");
-                        EB.clickthrough();
-                    }
-                }
-            });
+        <!-- Update this click through URL & also update the click through in the noscript tag at the end of this page for the backup image -->
+        <script type="text/javascript">
+            var clickTag = "https://example.com";
         </script>
-
         <script language="javascript">
 
             function _politeLoad(urls, onComplete) {
@@ -81,8 +61,14 @@
                 document.getElementsByTagName("head")[0].appendChild(script);
             }
 
-            function pageLoadedHandler() {
+            // iabSubloadCompleteHandler will fire when the when the IAB Subload Handler
+            // has determined it is approprate to now load banner content and
+            // identify it as "sub load". This banner does almost all of it's work in the
+            // "sub load" phase which generally has more robust specs than the initial
+            // load phase
+            function iabSubloadCompleteHandler() {
                 // Now that the ad is actual in a visible area, let's start this party.
+
 
                 /*
 
@@ -109,7 +95,7 @@
                 _politeLoad([
                     // 'https://code.createjs.com/1.0.0/preloadjs.min.js',
                     // 'https://code.createjs.com/1.0.0/easeljs.min.js',
-                    'https://cdn.jsdelivr.net/npm/gsap@3.0.1/dist/gsap.min.js',
+                    'https://s0.2mdn.net/ads/studio/cached_libs/gsap_3.5.1_min.js',
                     'script.js'
                 ], function () {
                     console.log('bannerInit');
@@ -150,21 +136,100 @@
                 // console.log("handleFileError", e)
                 // }
             }
+
+            /*
+
+    The IAB LEAN ad standards has replaced the "polite load" with the concept of a "sub load".
+
+    See this article for inforamtion on LEAN:
+
+    https://iabtechlab.com/blog/building-light-weight-and-load-optimized-ad-creatives/
+
+    The short version is that we now listen for the "iabSubLoadStart" event on the window. Depending on
+    how your ad is served, the ad *might* get notified of the parent page being ready for the polite
+    ad load. If the page doesn't provide this event, your ad will wait 4 seconds and play anyway.
+
+    To implement this, we use the iabSubLoadStart function as described in this Github repo which
+    was referenced in the article above.
+
+    https://github.com/Unitadtechnologystandards/Initial-Sub-Load
+
+    As of this writing, 07JAN2021, there is an error in the publised code on the git repo. We use a
+    fixed version of the code below and then listen for the event. See https://github.com/Unitadtechnologystandards/Initial-Sub-Load/issues/2 for the fixed.
+
+    */
+
+            (function () {
+                var iabSubLoadLib = {
+                    mainWindow: (window.top !== window) ? window.top : window,
+                    waitTimer: 4,
+                    friendlyFrame: (function () {
+                        try {
+                            return(window.top.document);
+                        } catch (e) {
+                            return false;
+                        }
+                    })(),
+                    postMessageHandler: function (event) {
+                        if (typeof event.data === 'string' && event.data === 'IAB_HOST_LOADED') {
+                            window.clearTimeout(iabSubLoadLib.loadTimer);
+                            iabSubLoadLib.startSubLoad();
+                        }
+                    },
+                    loadTimer: '',
+                    subLoadEvent: (typeof CustomEvent === 'function') ? new CustomEvent('iabSubLoadStart') : (document.createEvent('Event')).initEvent('iabSubLoadStart', true, true),
+                    startSubLoad: function () {
+                        return self.dispatchEvent(iabSubLoadLib.subLoadEvent);
+                    }
+                };
+                if (iabSubLoadLib.friendlyFrame) { // we know we are in a friendly iframe or directly on the site, check readystate
+                    if (iabSubLoadLib.mainWindow.document.readyState !== 'complete') { // site is still loading, use event
+                        iabSubLoadLib.mainWindow.document.addEventListener('readystatechange', function () {
+                            if (iabSubLoadLib.mainWindow.document.readyState === 'complete') {
+                                iabSubLoadLib.startSubLoad();
+                            }
+                        });
+                    } else { // site is already loaded, start subload
+                        iabSubLoadLib.startSubLoad();
+                    }
+                } else { // we are in an unfriendly iframe, wait a bit before subload starts or the site sends a message that it is loaded
+                    window.addEventListener('message', iabSubLoadLib.postMessageHandler.bind(iabSubLoadLib));
+                    iabSubLoadLib.loadTimer = setTimeout(function () {
+                        window.removeEventListener('message', iabSubLoadLib.postMessageHandler);
+                        iabSubLoadLib.startSubLoad();
+                    }, iabSubLoadLib.waitTimer * 1000);
+                }
+            }());
+
+            // Here is where we listen for the 'iabSubLoadStart' custom event and then fire the "pageLoadedHandler" function to start the banner.
+            window.addEventListener('iabSubLoadStart', function () {
+                iabSubloadCompleteHandler();
+            });
         </script>
     </head>
 
-    <body onload="pageLoadedHandler();">
+    <body>
         <div id="container_ad">
             <div
                 id="content_ad">
                 <!-- Your banner ad content goes here -->
                 <div id="remove-me">
                     <div>Build A Banner</div>
-                    <div>Sizmek version</div>
+                    <div>IAB Subload version</div>
                 </div>
             </div>
             <button id="background_exit_ad"></button>
         </div>
+        <script type="text/javascript">
+            document.getElementById("background_exit_ad").onclick = function () {
+                window.open(window.clickTag);
+            };
+        </script>
+        <!-- Remove the comment tags around the noscript area below if you would like to include a backup image within your banner build. This isn't typically done, but we've seen it requested by some clients. Doing a back up image this way impacts the K size of your banner build. Instead of doing backups this way, the are typically delivered as a separate standand-alone image. -->
+    <!-- You must create a backup image and include it here for users without JS -->
+        <!-- <noscript>
+                                        <a href="http://example.com"><img src="backupimage.jpg" width="<%= actualBannerWidth %>" height="<%= actualBannerHeight %>"></a>
+                                    </noscript> -->
     </body>
 
 </html>

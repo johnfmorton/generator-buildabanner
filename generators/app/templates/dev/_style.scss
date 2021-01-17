@@ -1,5 +1,5 @@
 @charset "UTF-8";
-/* CSS Document */ 
+/* CSS Document */
 
 $bannerBackColor: #6699cc;
 
@@ -24,7 +24,7 @@ body, body * {
   transform-origin: 0% 0%;;
 
 	position: absolute;
-    // width and height are 2px less than the expected 
+    // width and height are 2px less than the expected
     // size to accommodate the 1px border on the ad
 	width: <%= bannerWidth %>px;
 	height: <%= bannerHeight %>px;
@@ -36,7 +36,7 @@ body, body * {
 
     // these are only useful in rare circumstances
     // so they are commented out
-    // 
+    //
     // -webkit-transform : translateZ(0);
     // -o-transform : translateZ(0);
     // -moz-transform : translateZ(0);
@@ -45,11 +45,11 @@ body, body * {
     // -webkit-backface-visibility: hidden;
     // -moz-backface-visibility: hidden;
     // -ms-backface-visibility: hidden;
-    // 
+    //
     // Alternately, you might find the 'will-change'
     // proptery useful instead. See this link for more info:
     // https://dev.opera.com/articles/css-will-change-property/
-    // 
+    //
     // will-change: transform, opacity;
 }
 
@@ -62,11 +62,11 @@ body, body * {
 	z-index: 100;
 	background: $bannerBackColor; // url(background.jpg);
     // If you put a single sprite sheet into all of your
-    // div tags, you can effeciently set the background 
+    // div tags, you can effeciently set the background
     // image of all child divs with this rule below.
     // You will need to set the background position,
     // width and height on the individual divs.
-    // 
+    //
     // div {
     //     opacity: 0;
     //     position: absolute;
@@ -80,15 +80,21 @@ body, body * {
 
 // Remove this sample rule
 #remove-me {
-  position: relative;
-  width: 100%;
-  text-align: center;
-  top: 50%;
-  transform: translateY(-50%);
-  font-weight: bold;
-  color: white;
-} 
-
+    position: relative;
+    width: 100%;
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+    line-height: 1;
+    font-weight: bold;
+    color: white;
+      div:first-of-type {
+          font-weight: bold;
+      }
+      div:last-of-type {
+          font-size: 10px;
+      }
+  }
 
 
 /* Invisible button for background clickthrough.
