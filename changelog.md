@@ -2,6 +2,24 @@
 
 ## Changelog
 
+## [2.0.15] - 2021-01-16
+
+### Added
+
+- Added new banner type, standard Google banner with IAB Subload. This is to conform to the "subload" as outlined in this IAB post: https://iabtechlab.com/blog/building-light-weight-and-load-optimized-ad-creatives/
+
+### Changed
+
+- The packages used in banner builder have been updated as follows:
+- ansi-colors from 2.0.5 to 4.1.1
+- del from 3.0.0 to 6.0.0
+- gulp-htmlmin from 4.0.0 to 5.0.1
+- gulp-rename from 1.4.0 to 2.0.0
+- gulp-zip from 4.2.0 to 5.0.2
+- htmlparser2 from 3.10.1 to 6.0.0
+- image-size from 0.6.3 to 0.9.3
+- yargs from 12.0.5 to 16.2.0
+
 ## [2.0.14] - 2020-04-08
 
 ### Fixed
