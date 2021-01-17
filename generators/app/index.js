@@ -8,7 +8,9 @@ const slugify = require("@sindresorhus/slugify");
 
 // let myanswers;
 
-module.exports = class extends Generator {
+module.exports = class extends (
+  Generator
+) {
   constructor(args, opts) {
     super(args, opts);
     // this.method3 = function() {
@@ -63,12 +65,13 @@ module.exports = class extends Generator {
         name: "bannerType",
         message: "What type of banner is this?",
         choices: [
-          "Google Ad (DCM/Ad Words)",
+          "Standard Google Ad (DCM/Ad Words)",
+          "Standard Google Ad (DCM/Ad Words) with IAM subload capablity",
           "DoubleClick",
           "Standard Non-Google Ad",
           "Sizmek",
         ],
-        default: "Google Ad (DCM/Ad Words)",
+        default: "Standard Google Ad (DCM/Ad Words)",
       },
       {
         type: "list",
@@ -197,7 +200,10 @@ module.exports = class extends Generator {
       case "Standard Non-Google Ad":
         bannerSuffix = "_nongoogle";
         break;
-      case "Google Ad (DCM/Ad Words)":
+      case "Standard Google Ad (DCM/Ad Words) with IAM subload capablity":
+        bannerSuffix = "_standard_iab_subload";
+        break;
+      case "Standard Google Ad (DCM/Ad Words)":
       default:
         bannerSuffix = "_standard";
     }
@@ -229,7 +235,7 @@ module.exports = class extends Generator {
     var urlParameters = "";
 
     if (this.props.bannerType === "Standard Non-Google Ad") {
-      urlParameters = "?clickTAG=http://example.com";
+      urlParameters = "?clickTAG=https://example.com";
     }
 
     // process and copy the gulpfile
