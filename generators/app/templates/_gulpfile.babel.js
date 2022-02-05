@@ -22,7 +22,7 @@ const removeCode = require("gulp-remove-code");
 const log = require("fancy-log");
 const c = require("ansi-colors");
 const fs = require("fs");
-const notify = require("gulp-notify");
+// const notify = require("gulp-notify");
 
 const imageSize = require("image-size");
 const size = require("gulp-size");
@@ -311,6 +311,14 @@ function copydist() {
     .pipe(gulp.dest("dist"));
 }
 
+// Create a string with a single character in a specific length
+function _createStringByLength(char, length) {
+  var str = "";
+  for (var i = 0; i < length; i++) {
+    str += char;
+  }
+  return str;
+}
 function compress() {
   const s = size({ showFiles: false, gzip: false, showTotal: false });
   // this run AFTER the copydist function, so all files that make up the banner are in the
@@ -323,18 +331,16 @@ function compress() {
       .pipe(zip(archiveName + ".zip"))
       .pipe(s)
       .pipe(gulp.dest("delivery"))
-      .pipe(
-        notify({
-          title: "Build A Banner",
-          templateOptions: {
-            date: new Date(),
-          },
-          message: () => {
-            return archiveName + ".zip : " + s.prettySize;
-          },
-          onLast: true,
-        })
-      )
+      .on('end', function(){
+        var report = "* "+ archiveName + ".zip : " + s.prettySize + " *";
+        var reportLength = report.length;
+        var bannerBumper = _createStringByLength('*', reportLength);
+
+        log(c.green(bannerBumper));
+        log(c.green('* ') + c.yellow(archiveName + ".zip : " + s.prettySize) + c.green(' *'));
+        log(c.green(bannerBumper));
+
+      })
   );
 }
 
@@ -429,21 +435,11 @@ function serve() {
   return new Promise(function (resolve, reject) {
     serverInfo = connect.server({
       name: "Build A Banner Server",
-      port: 8889,
+      host: '0.0.0.0',
+      port: 8080,
       root: ["dev", ".temp"],
       livereload: true,
     });
-    resolve();
-  });
-}
-
-function openBrowser() {
-  return new Promise(function (resolve, reject) {
-    gulp.src(__filename).pipe(
-      open({
-        uri: `http://localhost:${serverInfo.port}<%= urlParameters %>`,
-      })
-    );
     resolve();
   });
 }
@@ -516,8 +512,7 @@ const defaultTasks = gulp.series(
   clean,
   turnOnDevMode,
   compile,
-  gulp.parallel(serve, watch),
-  openBrowser
+  gulp.parallel(serve, watch)
 );
 
 defaultTasks.description =
