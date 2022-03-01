@@ -2,6 +2,15 @@
 
 ## Changelog
 
+## [2.1.0-beta.4] - 2022-03-01
+- Updated the clickTag URL to 'http://www.google.com' from 'http://example.com' due to ad being rejected by trafficker of recent banner ad.
+- Updated versions default JS animation libraries.
+
+## [2.1.0-beta.3] - 2022-02-05
+## [2.1.0-beta.2] - 2022-02-05
+## [2.1.0-beta.1] - 2022-02-04
+- Reworking to allow Build A Banner to work in a Docker container.
+
 ## [2.0.15] - 2021-01-16
 
 ### Added
