@@ -23,7 +23,7 @@
         <!--endRemoveIf(production)-->
         <!-- Update this click through URL & also update the click through in the noscript tag at the end of this page for the backup image -->
         <script type="text/javascript">
-            var clickTag = "https://example.com";
+            var clickTag = "http://www.google.com";
         </script>
         <script language="javascript">
 
@@ -85,17 +85,17 @@
         https://code.createjs.com/
 
         PreloadJS from the CreateJS is a common one we use (this is the Adobe CDN version):
-        https://code.createjs.com/1.0.0/preloadjs.min.js
+        https://s0.2mdn.net/ads/studio/cached_libs/preloadjs_1.0.0_min.js
 
         If you're working on a HTML canvas ad, you will probably want the Easel JS library too.
-        https://code.createjs.com/1.0.0/easeljs.min.js
+        https://s0.2mdn.net/ads/studio/cached_libs/createjs_2019.11.15_min.js
         */
 
                 // now you can just feed stuff into that one function and give it a callback...
                 _politeLoad([
-                    // 'https://code.createjs.com/1.0.0/preloadjs.min.js',
-                    // 'https://code.createjs.com/1.0.0/easeljs.min.js',
-                    'https://s0.2mdn.net/ads/studio/cached_libs/gsap_3.5.1_min.js',
+                    // 'https://s0.2mdn.net/ads/studio/cached_libs/preloadjs_1.0.0_min.js',
+                    // 'https://s0.2mdn.net/ads/studio/cached_libs/createjs_2019.11.15_min.js',
+                    'https://s0.2mdn.net/ads/studio/cached_libs/gsap_3.9.1_min.js',
                     'script.js'
                 ], function () {
                     console.log('bannerInit');
