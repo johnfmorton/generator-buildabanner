@@ -2,6 +2,9 @@
 
 ## Changelog
 
+## [2.1.0] - 2022-03-06
+- Pushing the beta version to production.
+
 ## [2.1.0-beta.4] - 2022-03-01
 - Updated the clickTag URL to 'http://www.google.com' from 'http://example.com' due to ad being rejected by trafficker of recent banner ad.
 - Updated versions default JS animation libraries.
