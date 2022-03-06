@@ -2,16 +2,14 @@
 
 This is a [Yeoman](https://yeoman.io) generator to get a starter standard, AdWords, Sizmek or DoubleClick banner scaffolded out quickly.
 
-## Beta version for Docker comptatibilty
+## 2.1.0 and later adds Docker comptatibilty
 
-This [beta version](https://www.npmjs.com/package/generator-buildabanner/v/2.1.0-beta.3) of Build A Banner is nearly identical to version 2.0.15 except that has had modifications to make it work inside a Docker container. See [https://hub.docker.com/r/johnfmorton/yo-buildabanner](https://hub.docker.com/r/johnfmorton/yo-buildabanner) for more information about using _Build A Banner_ in Docker.
+The [2.1.0) version](https://www.npmjs.com/package/generator-buildabanner/v/2.1.0) of Build A Banner is nearly identical to version 2.0.15 except that has had modifications to make it work inside a Docker container. See [https://hub.docker.com/r/johnfmorton/yo-buildabanner](https://hub.docker.com/r/johnfmorton/yo-buildabanner) for more information about using _Build A Banner_ in Docker.
 
 1. I've removed the "gulp-notify" plugin since when run within a Docker container, those messages were not reaching the host operating system. The messages that were generated in a notification now happen in the console.
 2. Attempting to open the browser window when running the `gulp` command would cause an error when Build A Banner was running in a container so that has been removed. You now must open your browswer window manually.
 3. Lastly, to allow the Docker container to expose the dev server's port, the host has changed from "localhost" to "0.0.0.0".
 
-To install the beta version, use this command to specify the `beta` tag:
-`npm install -g generator-buildabanner@beta`
 ## Version 2
 
 After 37 releases, Build A Banner has jumped to the 2.0 version. There was never a version 1 in all the previous 37 releases. It had always been version 0 although at some point it should have graduated to version 1. It just didn't happen.

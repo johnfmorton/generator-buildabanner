@@ -2,6 +2,9 @@
 
 ## Changelog
 
+## [2.1.1] - 2022-03-06
+- Updated readme to remove reference to beta version in favor of release version.
+
 ## [2.1.0] - 2022-03-06
 - Pushing the beta version to production.
 
